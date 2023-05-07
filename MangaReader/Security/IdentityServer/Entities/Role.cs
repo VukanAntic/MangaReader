@@ -4,7 +4,7 @@ using MongoDbGenericRepository.Attributes;
 namespace IdentityServer.Entities
 {
     [CollectionName("Roles")]
-    public class ApplicationRole : MongoIdentityRole<Guid>
+    public class Role : MongoIdentityRole<Guid>
     {
     }
 }

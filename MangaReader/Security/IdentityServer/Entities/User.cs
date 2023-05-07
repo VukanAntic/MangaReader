@@ -1,15 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AspNetCore.Identity.MongoDbCore.Models;
+using MongoDbGenericRepository.Attributes;
 
 namespace IdentityServer.Entities
 {
-    public class User
+    [CollectionName("Users")]
+    public class User : MongoIdentityUser<Guid>
     {
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        [EmailAddress(ErrorMessage = "Invalid Email")]
-        public string Email { get; set; }
-        [Required]
-        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

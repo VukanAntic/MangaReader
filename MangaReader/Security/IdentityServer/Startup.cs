@@ -1,5 +1,8 @@
-﻿using IdentityServer.Entities;
+﻿using IdentityServer.DTOs;
+using IdentityServer.Entities;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
+using AutoMapper;
 
 namespace IdentityServer
 {
@@ -19,12 +22,15 @@ namespace IdentityServer
 
             var mongoDbSettings = Configuration.GetValue<string>("DatabaseSettings:ConnectionString");
             var mongoDbName = Configuration.GetValue<string>("DatabaseSettings:MongoName");
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
-                .AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>(
+            services.AddIdentity<User, Role>()
+                .AddMongoDbStores<User, Role, Guid>(
                 mongoDbSettings, mongoDbName
                 );
 
-
+            services.AddAutoMapper(configuration =>
+            {
+                configuration.CreateMap<UserCreateDTO, User>().ReverseMap();
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

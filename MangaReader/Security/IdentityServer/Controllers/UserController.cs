@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using IdentityServer.DTOs;
+using AutoMapper;
 
 namespace IdentityServer.Controllers
 {
@@ -9,27 +11,27 @@ namespace IdentityServer.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private UserManager<Entities.ApplicationUser> _userManager;
+        private UserManager<User> _userManager;
+        private IMapper _mapper;
 
-        public UserController(UserManager<ApplicationUser> userManager)
+        public UserController(UserManager<User> userManager, IMapper mapper)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateUser([FromBody] User user)
+        public async Task<IActionResult> CreateUser([FromBody] UserCreateDTO user)
         {
+
+            var newUser = _mapper.Map<User>(user);
+
             if (ModelState.IsValid)
             {
-                ApplicationUser appUser = new ApplicationUser
-                {
-                    UserName = user.Name,
-                    Email = user.Email
-                };
 
-                IdentityResult result = await _userManager.CreateAsync(appUser, user.Password);
+                IdentityResult result = await _userManager.CreateAsync(newUser, user.Password);
                 if (result.Succeeded)
                 {
                     return StatusCode(StatusCodes.Status201Created);
