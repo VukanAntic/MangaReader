@@ -3,6 +3,7 @@ using IdentityServer.Entities;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using AutoMapper;
+using IdentityServer.Extentions;
 
 namespace IdentityServer
 {
@@ -20,23 +21,11 @@ namespace IdentityServer
 
             services.AddAuthentication();
 
-            var mongoDbSettings = Configuration.GetValue<string>("DatabaseSettings:ConnectionString");
-            var mongoDbName = Configuration.GetValue<string>("DatabaseSettings:MongoName");
-            services.AddIdentity<User, Role>()
-                .AddMongoDbStores<User, Role, Guid>(
-                mongoDbSettings, mongoDbName
-                );
+            //Connecting to MongoDB
+            services.ConfigurePersistence(Configuration);
 
-
-            services.AddAutoMapper(configuration =>
-            {
-                configuration.CreateMap<UserCreateDTO, User>().ReverseMap();
-            });
-
-            services.AddAutoMapper(configuration =>
-            {
-                configuration.CreateMap<RoleCreateDTO, Role>().ReverseMap();
-            });
+            // Mapping UserDTO - User and RoleDTO - Role
+            services.Mapper(Configuration);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
