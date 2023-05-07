@@ -12,23 +12,17 @@ namespace IdentityServer
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddAuthentication();
+
             var mongoDbSettings = Configuration.GetValue<string>("DatabaseSettings:ConnectionString");
             var mongoDbName = Configuration.GetValue<string>("DatabaseSettings:MongoName");
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>(
                 mongoDbSettings, mongoDbName
                 );
-
-            //services.AddAuthentication();
-
-            //services.ConfigurePersistence(Configuration);
-            //services.ConfigureIdentity();
-            //services.ConfigureJWT(Configuration);
-
-            //services.ConfigureMiscellaneousServices();
 
 
 
@@ -52,8 +46,8 @@ namespace IdentityServer
             app.UseCors("CorsPolicy");
             app.UseRouting();
 
-           // app.UseAuthentication();
-            //app.UseAuthorization();
+            app.UseAuthentication();
+
 
             app.UseEndpoints(endpoints =>
             {

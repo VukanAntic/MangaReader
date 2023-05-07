@@ -1,9 +1,12 @@
 ﻿using IdentityServer.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace IdentityServer.Controllers
 {
+    [Route("api/v1/[controller]")]
+    [ApiController]
     public class UserController : ControllerBase
     {
         private UserManager<Entities.ApplicationUser> _userManager;
@@ -16,9 +19,10 @@ namespace IdentityServer.Controllers
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateUser(User user)
+        public async Task<IActionResult> CreateUser([FromBody] User user)
         {
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
                 ApplicationUser appUser = new ApplicationUser
                 {
                     UserName = user.Name,
@@ -26,13 +30,13 @@ namespace IdentityServer.Controllers
                 };
 
                 IdentityResult result = await _userManager.CreateAsync(appUser, user.Password);
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     return StatusCode(StatusCodes.Status201Created);
                 }
                 else
                 {
-                    foreach(IdentityError error in result.Errors)
+                    foreach (IdentityError error in result.Errors)
                     {
                         ModelState.TryAddModelError(error.Code, error.Description);
                     }
