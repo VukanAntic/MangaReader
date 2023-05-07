@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 25.0.1705.4
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "Security\IdentityServer\IdentityServer.csproj", "{05B2D3CB-BA69-4E44-8F19-0A0E3056C413}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "Security\IdentityServer\IdentityServer.csproj", "{05B2D3CB-BA69-4E44-8F19-0A0E3056C413}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaCatalog.API", "MangaCatalog.API\MangaCatalog.API.csproj", "{F5C51007-2C24-42C3-AEC9-B415E9F4CE6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{05B2D3CB-BA69-4E44-8F19-0A0E3056C413}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05B2D3CB-BA69-4E44-8F19-0A0E3056C413}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05B2D3CB-BA69-4E44-8F19-0A0E3056C413}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5C51007-2C24-42C3-AEC9-B415E9F4CE6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5C51007-2C24-42C3-AEC9-B415E9F4CE6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5C51007-2C24-42C3-AEC9-B415E9F4CE6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5C51007-2C24-42C3-AEC9-B415E9F4CE6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

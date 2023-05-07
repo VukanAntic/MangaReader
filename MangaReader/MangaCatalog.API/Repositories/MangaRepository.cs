@@ -33,7 +33,8 @@ namespace MangaCatalog.API.Repositories
             using var connection = _context.GetConnection();
 
             var manga = await connection.QueryFirstOrDefaultAsync<Manga>(
-                "SELECT * FROM manga WHERE ID = @MangaId", new { MangaId = id });
+                "SELECT * FROM manga WHERE ID = @MangaId",
+                new { MangaId = id });
 
             return _mapper.Map<DescriptiveMangaDTO>(manga);
         }
@@ -45,7 +46,8 @@ namespace MangaCatalog.API.Repositories
             using var connection = _context.GetConnection();
 
             var mangas = await connection.QueryAsync<Manga>(
-                "SELECT * FROM manga WHERE author_id = @AuthorId", new { AuthorId = authorId });
+                "SELECT * FROM manga WHERE author_id = @AuthorId",
+                new { AuthorId = authorId });
 
             return _mapper.Map<IEnumerable<MangaDTO>>(mangas);
         }
@@ -55,7 +57,9 @@ namespace MangaCatalog.API.Repositories
             using var connection = _context.GetConnection();
 
             var mangas = await connection.QueryAsync<Manga>(
-                "SELECT * FROM manga WHERE ID in (SELECT id_manga FROM manga_genre WHERE id_genre = @Genre)", new { Genre = genreId });
+                "SELECT * FROM manga WHERE ID in " +
+                "(SELECT id_manga FROM manga_genre WHERE id_genre = @Genre)",
+                new { Genre = genreId });
 
             return _mapper.Map<IEnumerable<MangaDTO>>(mangas);
         }
@@ -65,7 +69,8 @@ namespace MangaCatalog.API.Repositories
             using var connection = _context.GetConnection();
 
             var mangas = await connection.QueryAsync<Manga>(
-                "SELECT * FROM manga WHERE LOWER(title) LIKE CONCAT('%',@Query,'%')", new { Query = queryString });
+                "SELECT * FROM manga WHERE LOWER(title) LIKE CONCAT('%',@Query,'%')",
+                new { Query = queryString });
 
             return _mapper.Map<IEnumerable<MangaDTO>>(mangas);
         }
