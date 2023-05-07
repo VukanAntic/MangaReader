@@ -27,9 +27,15 @@ namespace IdentityServer
                 mongoDbSettings, mongoDbName
                 );
 
+
             services.AddAutoMapper(configuration =>
             {
                 configuration.CreateMap<UserCreateDTO, User>().ReverseMap();
+            });
+
+            services.AddAutoMapper(configuration =>
+            {
+                configuration.CreateMap<RoleCreateDTO, Role>().ReverseMap();
             });
 
             services.AddControllers();

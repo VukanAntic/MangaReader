@@ -5,6 +5,6 @@ namespace IdentityServer.DTOs
     public class RoleCreateDTO
     {
         [Required]
-        public string RoleName { get; set; }
+        public string Name { get; set; }
     }
 }
