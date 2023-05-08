@@ -1,4 +1,4 @@
-﻿using MangaCatalog.API.DTOs;
+﻿using MangaCatalog.API.DTOs.Manga;
 
 namespace MangaCatalog.API.Repositories.Interfaces
 {
@@ -13,5 +13,6 @@ namespace MangaCatalog.API.Repositories.Interfaces
         Task<IEnumerable<MangaDTO>> GetMangasByAuthorId(string authorId);
 
         Task<IEnumerable<MangaDTO>> GetMangasBySearch(string queryString);
+
     }
 }

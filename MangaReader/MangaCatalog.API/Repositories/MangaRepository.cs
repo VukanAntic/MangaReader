@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Dapper;
 using MangaCatalog.API.Data;
-using MangaCatalog.API.DTOs;
+using MangaCatalog.API.DTOs.Manga;
 using MangaCatalog.API.Entities;
 using MangaCatalog.API.Repositories.Interfaces;
 
