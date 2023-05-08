@@ -5,7 +5,7 @@ namespace MangaCatalog.API.Repositories.Interfaces
     public interface IMangaRepository
     {
         Task<IEnumerable<MangaDTO>> GetAllMangas();
-        Task<DescriptiveMangaDTO?> GetMangaById(string id);
+        Task<MangaDTO?> GetMangaById(string id);
 
         Task<IEnumerable<MangaDTO>> GetMangasByGenre(string genreId);
 

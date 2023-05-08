@@ -28,7 +28,7 @@ namespace MangaCatalog.API.Repositories
             return _mapper.Map<IEnumerable<MangaDTO>>(mangas);
         }
 
-        public async Task<DescriptiveMangaDTO?> GetMangaById(string id)
+        public async Task<MangaDTO?> GetMangaById(string id)
         {
             using var connection = _context.GetConnection();
 
@@ -36,7 +36,7 @@ namespace MangaCatalog.API.Repositories
                 "SELECT * FROM manga WHERE ID = @MangaId",
                 new { MangaId = id });
 
-            return _mapper.Map<DescriptiveMangaDTO>(manga);
+            return _mapper.Map<MangaDTO>(manga);
         }
 
 
