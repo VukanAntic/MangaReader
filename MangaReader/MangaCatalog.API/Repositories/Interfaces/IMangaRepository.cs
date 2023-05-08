@@ -7,9 +7,10 @@ namespace MangaCatalog.API.Repositories.Interfaces
         Task<IEnumerable<MangaDTO>> GetAllMangas();
         Task<MangaDTO?> GetMangaById(string id);
 
-        Task<IEnumerable<MangaDTO>> GetMangasByGenre(string genreId);
+        Task<IEnumerable<MangaDTO>> GetMangasByGenreId(string genreId);
+        Task<IEnumerable<MangaDTO>> GetMangasByGenreName(string genreName);
 
-        Task<IEnumerable<MangaDTO>> GetMangasByAuthor(string authorId);
+        Task<IEnumerable<MangaDTO>> GetMangasByAuthorId(string authorId);
 
         Task<IEnumerable<MangaDTO>> GetMangasBySearch(string queryString);
     }

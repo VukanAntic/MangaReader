@@ -41,7 +41,7 @@ namespace MangaCatalog.API.Repositories
 
 
         // Could be possible that we might want to search via author name or genre name, so this might need changes
-        public async Task<IEnumerable<MangaDTO>> GetMangasByAuthor(string authorId)
+        public async Task<IEnumerable<MangaDTO>> GetMangasByAuthorId(string authorId)
         {
             using var connection = _context.GetConnection();
 
@@ -52,7 +52,22 @@ namespace MangaCatalog.API.Repositories
             return _mapper.Map<IEnumerable<MangaDTO>>(mangas);
         }
 
-        public async Task<IEnumerable<MangaDTO>> GetMangasByGenre(string genreId)
+        public async Task<IEnumerable<MangaDTO>> GetMangasByGenreName(string genreName)
+        {
+            using var connection = _context.GetConnection();
+
+            var mangas = await connection.QueryAsync<Manga>(
+                "SELECT * FROM manga m WHERE id in " +
+                "(SELECT m_g.id_manga " +
+                "FROM manga_genre m_g " +
+                "JOIN genre g ON m_g.id_genre = g.id " +
+                "WHERE m.id = m_g.id_manga AND g.name = @GenreName) ",
+                new { GenreName = genreName });
+
+            return _mapper.Map<IEnumerable<MangaDTO>>(mangas);
+        }
+
+        public async Task<IEnumerable<MangaDTO>> GetMangasByGenreId(string genreId)
         {
             using var connection = _context.GetConnection();
 
@@ -68,6 +83,7 @@ namespace MangaCatalog.API.Repositories
         {
             using var connection = _context.GetConnection();
 
+            // TODO: FIX this search implementation
             var mangas = await connection.QueryAsync<Manga>(
                 "SELECT * FROM manga WHERE LOWER(title) LIKE CONCAT('%',@Query,'%')",
                 new { Query = queryString });
