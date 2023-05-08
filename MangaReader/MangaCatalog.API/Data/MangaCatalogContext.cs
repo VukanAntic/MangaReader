@@ -14,7 +14,8 @@ namespace MangaCatalog.API.Data
         }
 
         public NpgsqlConnection GetConnection() {
-            var connStr = _configuration.GetValue<string>("DatabaseSettings:ConnectionString");
+            var connStr = _configuration.GetValue<string>("Manga:UrlToDatabase");
+            Console.WriteLine(connStr);
             return new NpgsqlConnection(connStr);
         }
 
