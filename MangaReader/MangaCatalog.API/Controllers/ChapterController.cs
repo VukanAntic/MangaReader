@@ -1,0 +1,32 @@
+﻿using MangaCatalog.API.Entities;
+using MangaCatalog.API.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+
+namespace MangaCatalog.API.Controllers
+{
+
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ChapterController : ControllerBase
+    {
+
+        private readonly IMangaRepository _repository;
+
+        public ChapterController(IMangaRepository repository)
+        {
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+        }
+
+
+        [Route("[action]/{mangaId}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Chapter>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<Chapter>>> getAllChaptersForMangaId(string mangaId)
+        {
+            var chapters = await _repository.GetChaptersByMangaId(mangaId);
+            return Ok(chapters);
+
+        }
+
+    }
+}

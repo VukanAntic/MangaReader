@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Dapper;
 using MangaCatalog.API.Data;
+using MangaCatalog.API.DTOs.Chapter;
 using MangaCatalog.API.DTOs.Manga;
 using MangaCatalog.API.Entities;
 using MangaCatalog.API.Repositories.Interfaces;
@@ -89,6 +90,21 @@ namespace MangaCatalog.API.Repositories
                 new { Query = queryString });
 
             return _mapper.Map<IEnumerable<MangaDTO>>(mangas);
+        }
+
+        public async Task<IEnumerable<ChapterDTO>> GetChaptersByMangaId(string mangaId)
+        {
+            using var connection = _context.GetConnection();
+
+            var chapters = await connection.QueryAsync<Chapter>(
+                "SELECT * " +
+                "FROM chapter " +
+                "WHERE chapter.id_manga = @MangaId " +
+                "ORDER BY chapter.chapter_number ASC;",
+                new {MangaId = mangaId });
+
+            return _mapper.Map<IEnumerable<ChapterDTO>>(chapters);
+
         }
     }
 }
