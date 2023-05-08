@@ -36,37 +36,24 @@ namespace MangaCatalog.API.Controllers
             {
                 return NotFound(null);
             }
-
             return Ok(manga);
         }
 
         [Route("[action]/{genreName}")]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Manga>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(Manga), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<Manga>>> GetMangasByGenreName(string genreName)
         {
             var mangas = await _repository.GetMangasByGenreName(genreName);
-            // TODO: maybe not send NotFound, maybe just send the empty array as it is
-            if (mangas.Count() == 0)
-            {
-                return NotFound(null);
-            }
             return Ok(mangas);
         }
 
         [Route("[action]/{genreId}")]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Manga>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(Manga), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<Manga>>> GetMangasByGenreId(string genreId)
         {
             var mangas = await _repository.GetMangasByGenreId(genreId);
-            // TODO: maybe not send NotFound, maybe just send the empty array as it is
-            if (mangas.Count() == 0)
-            {
-                return NotFound(null);
-            }
             return Ok(mangas);
         }
 
@@ -74,15 +61,9 @@ namespace MangaCatalog.API.Controllers
         [Route("[action]/{authorId}")]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Manga>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(Manga), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<Manga>>> GetMangasByAuthorId(string authorId)
         {
             var mangas = await _repository.GetMangasByAuthorId(authorId);
-            // TODO: maybe not send NotFound, maybe just send the empty array as it is
-            if (mangas.Count() == 0)
-            {
-                return NotFound(null);
-            }
             return Ok(mangas);
         }
 
@@ -90,15 +71,9 @@ namespace MangaCatalog.API.Controllers
         [Route("[action]/{searchRequest}")]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Manga>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(Manga), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<Manga>>> GetMangasBySearch(string searchRequest)
         {
             var mangas = await _repository.GetMangasBySearch(searchRequest);
-            // TODO: maybe not send NotFound, maybe just send the empty array as it is
-            if (mangas.Count() == 0)
-            {
-                return NotFound(null);
-            }
             return Ok(mangas);
         }
 

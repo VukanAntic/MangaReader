@@ -85,7 +85,7 @@ namespace MangaCatalog.API.Repositories
 
             // TODO: FIX this search implementation
             var mangas = await connection.QueryAsync<Manga>(
-                "SELECT * FROM manga WHERE LOWER(title) LIKE CONCAT('%',@Query,'%')",
+                "SELECT * FROM manga WHERE LOWER(title) LIKE CONCAT('%',LOWER(@Query),'%')",
                 new { Query = queryString });
 
             return _mapper.Map<IEnumerable<MangaDTO>>(mangas);
