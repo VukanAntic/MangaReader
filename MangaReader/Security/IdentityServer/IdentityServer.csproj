@@ -28,4 +28,10 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="AuthenticationServices\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AuthenticationServices\" />
+  </ItemGroup>
 </Project>

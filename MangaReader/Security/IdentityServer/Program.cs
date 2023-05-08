@@ -12,8 +12,11 @@ builder.Services.AddSwaggerGen();
 // We replaced this with builder.Services.ConfigureJWT()
 // builder.Services.AddAuthentication();
 
+//Connecting to MongoDB
 builder.Services.ConfigurePersistence(builder.Configuration);
+// Mapping UserDTO - User and RoleDTO - Role
 builder.Services.Mapper(builder.Configuration);
+builder.Services.ConfigureMiscellaneousServices();
 
 var app = builder.Build();
 
