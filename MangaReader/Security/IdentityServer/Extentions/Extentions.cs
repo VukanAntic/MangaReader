@@ -10,7 +10,15 @@ namespace IdentityServer.Extentions
         {
             var mongoDbSettings = configuration.GetValue<string>("DatabaseSettings:ConnectionString");
             var mongoDbName = configuration.GetValue<string>("DatabaseSettings:MongoName");
-            services.AddIdentity<User, Role>()
+            services.AddIdentity<User, Role>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 8;
+                options.User.RequireUniqueEmail = true;
+            })
                 .AddMongoDbStores<User, Role, Guid>(
                 mongoDbSettings, mongoDbName
                 );

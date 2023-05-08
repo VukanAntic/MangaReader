@@ -1,4 +1,4 @@
-﻿using IdentityServer.Entities;
+﻿ using IdentityServer.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
@@ -11,10 +11,10 @@ namespace IdentityServer.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class AuthenticationController : RegisterControllerBase
+    public class AuthenticationController : RegistratonControllerBase
     {
-        public AuthenticationController(UserManager<User> userManager, RoleManager<Role> roleManager, IMapper mapper) 
-            : base(userManager, roleManager, mapper)
+        public AuthenticationController(ILogger<AuthenticationController> logger, UserManager<User> userManager, RoleManager<Role> roleManager, IMapper mapper) 
+            : base(logger, userManager, roleManager, mapper)
         {
         }
 
@@ -67,9 +67,6 @@ namespace IdentityServer.Controllers
                 }
             }
             return BadRequest(ModelState);
-
         }
-
-
     }
 }
