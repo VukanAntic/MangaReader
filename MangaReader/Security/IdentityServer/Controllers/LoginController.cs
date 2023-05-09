@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace IdentityServer.Controllers
 {
-	public class LoginController : ControllerBase
+    [Route("api/v1/[controller]")]
+    [ApiController]
+    public class LoginController : ControllerBase
 	{
         private readonly IAuthenticationService _authService;
         protected readonly ILogger<AuthenticationController> _logger;

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.Extensions.Options;
 
 namespace IdentityServer.Extentions
 {
@@ -36,12 +37,9 @@ namespace IdentityServer.Extentions
             services.AddAutoMapper(configuration =>
             {
                 configuration.CreateMap<UserCreateDTO, User>().ReverseMap();
-            });
-
-
-            services.AddAutoMapper(configuration =>
-            {
                 configuration.CreateMap<RoleCreateDTO, Role>().ReverseMap();
+                configuration.CreateMap<UserCredentialsDTO, User>().ReverseMap();
+                configuration.CreateMap<UserDetailsDTO, User>().ReverseMap();
             });
 
             return services;
@@ -71,7 +69,6 @@ namespace IdentityServer.Extentions
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                     };
                 });
-
             return services;
         }
 
