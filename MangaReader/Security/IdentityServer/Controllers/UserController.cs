@@ -1,4 +1,5 @@
 ﻿ using System;
+using System.Security.Claims;
 using AutoMapper;
 using IdentityServer.DTOs;
 using IdentityServer.Entities;
@@ -14,31 +15,46 @@ namespace IdentityServer.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
+        private readonly ILogger<UserController> _logger;
         private readonly IMapper _mapper;
 
-        public UserController(UserManager<User> userManager, IMapper mapper)
+        public UserController(UserManager<User> userManager, ILogger<UserController> logger, IMapper mapper)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        [HttpGet("{username}")]
+        [HttpGet]
         [ProducesResponseType(typeof(UserDetailsDTO), StatusCodes.Status200OK)]
-        public async Task<ActionResult<UserDetailsDTO>> GetUser(string username)
+        public async Task<ActionResult<UserDetailsDTO>> GetUser()
         {
+            var username = User.FindFirst(ClaimTypes.Name).Value;
             var user = await _userManager.FindByNameAsync(username);
+
             return Ok(_mapper.Map<UserDetailsDTO>(user));
         }
 
-       
-        //public async Task<ActionResult> DeleteUserAccount(string username)
-        //{
 
-        //}
+        [HttpDelete]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        public async Task<ActionResult> DeleteUserAccount()
+        {
+            var username = User.FindFirst(ClaimTypes.Name).Value;
+            var user = await _userManager.FindByNameAsync(username);
+            await _userManager.DeleteAsync(user);
 
-        //public async Task<ActionResult> ChangePassword([FromBody] ChangePassword changepassword)
-        //{
+            return Ok();
+        }
 
-        //}
+        [HttpPut]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        public async Task<ActionResult> ChangePassword([FromBody] UserChangePasswordDTO changepassword)
+        {
+            var username = User.FindFirst(ClaimTypes.Name).Value;
+            var user = await _userManager.FindByNameAsync(username);
+           
+            return Ok(await _userManager.ChangePasswordAsync(user, changepassword.OldPassword, changepassword.NewPassword));
+        }
     }
 }
