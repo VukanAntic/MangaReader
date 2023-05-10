@@ -16,6 +16,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigurePersistence(builder.Configuration);
 // Mapping UserDTO - User and RoleDTO - Role
 builder.Services.Mapper(builder.Configuration);
+// Configure JWT
+builder.Services.ConfigureJWT(builder.Configuration);
+// Add other services
 builder.Services.ConfigureMiscellaneousServices();
 
 var app = builder.Build();

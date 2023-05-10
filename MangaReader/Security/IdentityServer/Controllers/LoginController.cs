@@ -30,7 +30,7 @@ namespace IdentityServer.Controllers
             var user = await _authService.ValidateUser(userCredentials);
             if (user is null)
             {
-                _logger.LogWarning("{Login}: Authentication failed. Wrong username or password.", nameof(Login));
+                _logger.LogWarning("{Login}: Authentication failed. Wrong email or password.", nameof(Login));
                 return Unauthorized();
             }
 

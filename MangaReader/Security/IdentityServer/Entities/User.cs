@@ -6,7 +6,7 @@ namespace IdentityServer.Entities
     [CollectionName("Users")]
     public class User : MongoIdentityUser<Guid>
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
     }
 }

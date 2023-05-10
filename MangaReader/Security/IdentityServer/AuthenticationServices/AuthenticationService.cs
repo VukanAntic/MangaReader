@@ -29,7 +29,7 @@ namespace IdentityServer.AuthenticationServices
 
         public async Task<User?> ValidateUser(UserCredentialsDTO userCredentials)
         {
-            var user = await _userManager.FindByNameAsync(userCredentials.UserName);
+            var user = await _userManager.FindByNameAsync(userCredentials.Username);
 
             if (user is null || !await _userManager.CheckPasswordAsync(user, userCredentials.Password))
             {
