@@ -8,6 +8,7 @@ namespace IdentityServer.AuthenticationServices
 	{
         Task<User?> ValidateUser(UserCredentialsDTO userCredentials);
         Task<AuthenticationModel> CreateAuthenticationModel(User user);
+        Task<bool> RemoveRefreshToken(User user, string refreshToken);
     }
 }
 

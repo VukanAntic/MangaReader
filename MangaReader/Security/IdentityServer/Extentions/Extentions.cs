@@ -11,6 +11,11 @@ using AspNetCore.Identity.MongoDbCore.Infrastructure;
 using AspNetCore.Identity.MongoDbCore.Extensions;
 using Microsoft.AspNetCore.Identity;
 
+using IdentityServer.Data.Interfaces;
+using IdentityServer.Data;
+using IdentityServer.Repositories.Interfaces;
+using IdentityServer.Repositories;
+
 namespace IdentityServer.Extentions
 {
     public static class Extentions
@@ -90,6 +95,9 @@ namespace IdentityServer.Extentions
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IIdentityServerContext, IdentityServerContext>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+
             return services;
         }
     }

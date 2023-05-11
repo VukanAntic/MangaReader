@@ -11,6 +11,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.19.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,8 +31,16 @@
 
   <ItemGroup>
     <None Remove="AuthenticationServices\" />
+    <None Remove="Data\" />
+    <None Remove="Repositories\" />
+    <None Remove="Data\Interfaces\" />
+    <None Remove="Repositories\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AuthenticationServices\" />
+    <Folder Include="Data\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Data\Interfaces\" />
+    <Folder Include="Repositories\Interfaces\" />
   </ItemGroup>
 </Project>

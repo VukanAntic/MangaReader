@@ -1,9 +1,9 @@
 ﻿using System;
 namespace IdentityServer.DTOs
 {
-	public class AuthenticationModel
+	public class RefreshTokenModel
 	{
-        public string AccessToken { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
         public string RefreshToken { get; set; } = string.Empty;
     }
 }
