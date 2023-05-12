@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 25.0.1705.4
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "Security\IdentityServer\IdentityServer.csproj", "{05B2D3CB-BA69-4E44-8F19-0A0E3056C413}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInfo.API", "Services\UserInfo\UserInfo.API\UserInfo.API.csproj", "{E2B37FC3-6B2B-41BA-8A5F-F490E3A63FFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{05B2D3CB-BA69-4E44-8F19-0A0E3056C413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05B2D3CB-BA69-4E44-8F19-0A0E3056C413}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05B2D3CB-BA69-4E44-8F19-0A0E3056C413}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05B2D3CB-BA69-4E44-8F19-0A0E3056C413}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2B37FC3-6B2B-41BA-8A5F-F490E3A63FFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2B37FC3-6B2B-41BA-8A5F-F490E3A63FFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2B37FC3-6B2B-41BA-8A5F-F490E3A63FFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2B37FC3-6B2B-41BA-8A5F-F490E3A63FFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
