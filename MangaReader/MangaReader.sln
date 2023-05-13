@@ -5,6 +5,12 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInfo.API", "Services\UserInfo\UserInfo.API\UserInfo.API.csproj", "{E2B37FC3-6B2B-41BA-8A5F-F490E3A63FFC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{2ACB767C-7A37-476C-9EB6-6F1D1B6F105A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "New Folder", "New Folder", "{1650FCA8-F9A3-4B4A-BC20-1816516A623C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInfo", "UserInfo", "{C0E36FAA-698B-462F-AEFF-09429D652B97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,5 +27,10 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {054325B2-841E-4B55-9C9B-225E4BBE48D0}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1650FCA8-F9A3-4B4A-BC20-1816516A623C} = {2ACB767C-7A37-476C-9EB6-6F1D1B6F105A}
+		{C0E36FAA-698B-462F-AEFF-09429D652B97} = {2ACB767C-7A37-476C-9EB6-6F1D1B6F105A}
+		{E2B37FC3-6B2B-41BA-8A5F-F490E3A63FFC} = {C0E36FAA-698B-462F-AEFF-09429D652B97}
 	EndGlobalSection
 EndGlobal
