@@ -15,7 +15,7 @@ namespace MangaCatalog.API.Repositories.Interfaces
 
         Task<IEnumerable<MangaDTO>> GetMangasBySearch(string queryString);
 
-        Task<IEnumerable<ChapterDTO>> GetChaptersByMangaId(string mangaId);
+        
 
     }
 }

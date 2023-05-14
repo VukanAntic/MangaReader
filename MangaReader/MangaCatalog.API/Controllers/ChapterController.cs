@@ -10,9 +10,9 @@ namespace MangaCatalog.API.Controllers
     public class ChapterController : ControllerBase
     {
 
-        private readonly IMangaRepository _repository;
+        private readonly IChapterRepository _repository;
 
-        public ChapterController(IMangaRepository repository)
+        public ChapterController(IChapterRepository repository)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }

@@ -11,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IMangaCatalogContext, MangaCatalogContext>();
 builder.Services.AddScoped<IMangaRepository, MangaRepository>();
+builder.Services.AddScoped<IChapterRepository, ChapterRepository>();
+
 builder.Services.AddAutoMapper(configuration =>
 {
     configuration.CreateMap<MangaDTO, Manga>().ReverseMap();
