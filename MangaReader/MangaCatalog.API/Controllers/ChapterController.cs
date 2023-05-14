@@ -28,5 +28,17 @@ namespace MangaCatalog.API.Controllers
 
         }
 
+
+        [Route("[action]/{chapterId}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Chapter>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<Chapter>>> getPagesForChapterId(string chapterId)
+        {
+            var pages = await _repository.getPagesForChapterId(chapterId);
+            return Ok(pages);
+
+        }
+
+
     }
 }

@@ -12,6 +12,7 @@ namespace MangaCatalog.API.Repositories
         private readonly IMangaCatalogContext _context;
         private readonly IMapper _mapper;
 
+
         public ChapterRepository(IMangaCatalogContext context, IMapper mapper)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
@@ -29,6 +30,21 @@ namespace MangaCatalog.API.Repositories
                 new { MangaId = mangaId });
 
             return _mapper.Map<IEnumerable<ChapterDTO>>(chapters);
+        }
+
+        public async Task<IEnumerable<Page>> getPagesForChapterId(string chapterId)
+        {
+            using var connection = _context.GetConnection();
+
+            Console.WriteLine(chapterId);
+            var chapters = await connection.QueryAsync<Page>(
+                "SELECT chapter_id as ChapterId, page_number as pageNumber, image_link as imageLink " +
+                "FROM page " +
+                "WHERE chapter_id = @ChapterId " +
+                "ORDER BY page_number ASC;",
+                new { ChapterId = chapterId });
+
+            return chapters;
         }
     }
 }
