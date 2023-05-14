@@ -14,8 +14,13 @@ builder.Services.AddScoped<IMangaRepository, MangaRepository>();
 builder.Services.AddAutoMapper(configuration =>
 {
     configuration.CreateMap<MangaDTO, Manga>().ReverseMap();
+});
+
+builder.Services.AddAutoMapper(configuration =>
+{
     configuration.CreateMap<ChapterDTO, Chapter>().ReverseMap();
 });
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

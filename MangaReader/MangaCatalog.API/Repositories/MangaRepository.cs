@@ -24,7 +24,9 @@ namespace MangaCatalog.API.Repositories
         {
             using var connection = _context.GetConnection();
 
-            var mangas = await connection.QueryAsync<Manga>("SELECT * FROM manga");
+            var mangas = await connection.QueryAsync<Manga>(
+                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId " +
+                "FROM manga");
 
             return _mapper.Map<IEnumerable<MangaDTO>>(mangas);
         }
@@ -34,7 +36,9 @@ namespace MangaCatalog.API.Repositories
             using var connection = _context.GetConnection();
 
             var manga = await connection.QueryFirstOrDefaultAsync<Manga>(
-                "SELECT * FROM manga WHERE ID = @MangaId",
+                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId " +
+                "FROM manga " +
+                "WHERE ID = @MangaId",
                 new { MangaId = id });
 
             return _mapper.Map<MangaDTO>(manga);
@@ -47,7 +51,9 @@ namespace MangaCatalog.API.Repositories
             using var connection = _context.GetConnection();
 
             var mangas = await connection.QueryAsync<Manga>(
-                "SELECT * FROM manga WHERE author_id = @AuthorId",
+                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId " +
+                "FROM manga " +
+                "WHERE author_id = @AuthorId",
                 new { AuthorId = authorId });
 
             return _mapper.Map<IEnumerable<MangaDTO>>(mangas);
@@ -58,7 +64,9 @@ namespace MangaCatalog.API.Repositories
             using var connection = _context.GetConnection();
 
             var mangas = await connection.QueryAsync<Manga>(
-                "SELECT * FROM manga m WHERE id in " +
+                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId " +
+                "FROM manga m " +
+                "WHERE id in " +
                 "(SELECT m_g.id_manga " +
                 "FROM manga_genre m_g " +
                 "JOIN genre g ON m_g.id_genre = g.id " +
@@ -73,7 +81,9 @@ namespace MangaCatalog.API.Repositories
             using var connection = _context.GetConnection();
 
             var mangas = await connection.QueryAsync<Manga>(
-                "SELECT * FROM manga WHERE ID in " +
+                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId " +
+                "FROM manga " +
+                "WHERE ID in " +
                 "(SELECT id_manga FROM manga_genre WHERE id_genre = @Genre)",
                 new { Genre = genreId });
 
@@ -86,7 +96,9 @@ namespace MangaCatalog.API.Repositories
 
             // TODO: FIX this search implementation
             var mangas = await connection.QueryAsync<Manga>(
-                "SELECT * FROM manga WHERE LOWER(title) LIKE CONCAT('%',LOWER(@Query),'%')",
+                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId " +
+                "FROM manga " +
+                "WHERE LOWER(title) LIKE CONCAT('%',LOWER(@Query),'%')",
                 new { Query = queryString });
 
             return _mapper.Map<IEnumerable<MangaDTO>>(mangas);
@@ -97,14 +109,13 @@ namespace MangaCatalog.API.Repositories
             using var connection = _context.GetConnection();
 
             var chapters = await connection.QueryAsync<Chapter>(
-                "SELECT * " +
+                "SELECT id, id_manga as idManga, chapter_number as chapterNumber, title " +
                 "FROM chapter " +
                 "WHERE chapter.id_manga = @MangaId " +
-                "ORDER BY chapter.chapter_number ASC;",
-                new {MangaId = mangaId });
+                "ORDER BY CAST(chapter.chapter_number as float) ASC, chapter.chapter_number ASC;",
+                new { MangaId = mangaId });
 
             return _mapper.Map<IEnumerable<ChapterDTO>>(chapters);
-
         }
     }
 }
