@@ -12,8 +12,8 @@ builder.Services.AddSwaggerGen();
 
 // Connecting to ReddisDB
 builder.Services.ConfigureReddisDataBase(builder.Configuration);
-
-builder.Services.AddScoped<IUserInformationRepository, UserInfoReposotory>();
+//builder.Services.Mapper(builder.Configuration);
+builder.Services.ConfigureMiscellaneousServices();
 
 var app = builder.Build();
 

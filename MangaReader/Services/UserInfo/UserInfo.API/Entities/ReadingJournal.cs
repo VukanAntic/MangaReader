@@ -2,9 +2,8 @@
 {
     public class ReadingJournal
     {
-        public string LastReadMangaID { get; set; }
-        public List<string> AllReadMangaIDs { get; set; }
-   		public List<string> WishList { get; set; }
-
+        public string LastReadMangaID { get; set; } = string.Empty;
+        public List<string> AllReadMangaIDs { get; set; } = new List<string>();
+        public List<string> WishList { get; set; } = new List<string>();
     }
 }
