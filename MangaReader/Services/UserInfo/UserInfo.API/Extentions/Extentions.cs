@@ -2,6 +2,8 @@
 
 using UserInfo.API.Repository;
 using AutoMapper;
+using UserInfo.API.Entities;
+using UserInfo.API.DTOs;
 
 namespace UserInfo.API.Extentions
 {
@@ -17,18 +19,17 @@ namespace UserInfo.API.Extentions
             return services;
         }
 
-        //public static IServiceCollection Mapper(this IServiceCollection services, IConfiguration configuration)
-        //{
+        public static IServiceCollection Mapper(this IServiceCollection services, IConfiguration configuration)
+        {
 
-        //    services.
-        //    //services.AddAutoMapper(configuration =>
-        //    //{
-        //    //    configuration.CreateMap<UserCreateDTO, User>().ReverseMap();
-                
-        //    //});
+            services.AddAutoMapper(configuration =>
+            {
+                configuration.CreateMap<CreateUserInfoDTO, UserInformation>().ReverseMap();
 
-        //    return services;
-        //}
+            });
+
+            return services;
+        }
 
         public static IServiceCollection ConfigureMiscellaneousServices(this IServiceCollection services)
         {
