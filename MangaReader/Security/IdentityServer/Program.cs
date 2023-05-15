@@ -1,4 +1,4 @@
-﻿using IdentityServer.Extentions;
+using IdentityServer.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 
