@@ -16,13 +16,12 @@ namespace UserInfo.API.Controllers
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        [Route("[action]")]
         [HttpPost]
         [ProducesResponseType(typeof(UserInformation), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(UserInformation), StatusCodes.Status409Conflict)]
-        public async Task<ActionResult<UserInfoDTO>> CreateUser([FromBody] CreateUserInfoDTO userInfoDTO) 
+        public async Task<ActionResult<UserInformation>> CreateUser([FromBody] string userId) // createUserDTO dodati
         {
-            var userInfo = await _repository.CreateUserInfo(userInfoDTO);
+            var userInfo = await _repository.CreateUserInfo(userId);
             if(userInfo is null)
             {
                 return Conflict(userInfo);
@@ -33,7 +32,7 @@ namespace UserInfo.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(UserInformation), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(UserInformation), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserInfoDTO>> GetUserInfo(string id) 
+        public async Task<ActionResult<UserInformation>> GetUserInfo(string id) 
         {
             var userInfo = await _repository.GetUserInfo(id);
             if(userInfo is null)
@@ -45,11 +44,11 @@ namespace UserInfo.API.Controllers
 
         [HttpDelete]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(UserInfoDTO), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(UserInformation), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteUserInfo(string id)
         {
             var result = await _repository.DeleteUserInfo(id);
-            if (result)
+            if(result)
             {
                 return Ok();
             }
@@ -59,40 +58,10 @@ namespace UserInfo.API.Controllers
         [Route("[action]")]
         [HttpPut]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(UserInfoDTO), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserInfoDTO>> UpdateLastReadManga(UpdateUserInfoDTO userInfoDTO) 
+        [ProducesResponseType(typeof(UserInformation), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<UserInformation>> UpdateLastReadManga(string userId, string lastReadMangaId) // dodati UpdateMangaDTO
         {
-            var updatedUserInfo = await _repository.UpdateLastReadManga(userInfoDTO);
-            if (updatedUserInfo is null)
-            {
-                return NotFound(updatedUserInfo);
-            }
-
-            return Ok(updatedUserInfo);
-        }
-
-
-        [Route("[action]")]
-        [HttpPut]
-        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(UserInfoDTO), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserInfoDTO>> AddMangaInAllReadMangaIds(UpdateUserInfoDTO userInfoDTO) 
-        {
-            var updatedUserInfo = await _repository.AddMangaInAllReadMangaIds(userInfoDTO);
-            if (updatedUserInfo is null)
-            {
-                return NotFound(updatedUserInfo);
-            }
-            return Ok(updatedUserInfo);
-        }
-
-        [Route("[action]")]
-        [HttpPut]
-        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(UserInfoDTO), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserInfoDTO>> AddMangaInWishlist(UpdateUserInfoDTO userInfoDTO) 
-        {
-            var updatedUserInfo = await _repository.AddMangaInWishlist(userInfoDTO);
+            var updatedUserInfo = await _repository.UpdateLastReadManga(userId, lastReadMangaId);
             if (updatedUserInfo is null)
             {
                 return NotFound(updatedUserInfo);
@@ -104,10 +73,38 @@ namespace UserInfo.API.Controllers
         [Route("[action]")]
         [HttpPut]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(UserInfoDTO), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserInfoDTO>> RemoveMangaFromWishlist(UpdateUserInfoDTO userInfoDTO) 
+        [ProducesResponseType(typeof(UserInformation), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<UserInformation>> AddMangaInAllReadMangaIds(string userId, string newManga) // dodati UpdateMangaDTO
         {
-            var updatedUserInfo = await _repository.RemoveMangaFromWishlist(userInfoDTO);
+            var updatedUserInfo = await _repository.AddMangaInAllReadMangaIds(userId, newManga);
+            if(updatedUserInfo is null)
+            {
+                return NotFound(updatedUserInfo);
+            }
+            return Ok(updatedUserInfo);
+        }
+
+        [Route("[action]")]
+        [HttpPut]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserInformation), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<UserInformation>> AddMangaInWishlist(string userId, string newManga) // dodati UpdateMangaDTO
+        {
+            var updatedUserInfo = await _repository.AddMangaInWishlist(userId, newManga);
+            if (updatedUserInfo is null)
+            {
+                return NotFound(updatedUserInfo);
+            }
+            return Ok(updatedUserInfo);
+        }
+
+        [Route("[action]")]
+        [HttpPut]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserInformation), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<UserInformation>> RemoveMangaFromWishlist(string userId, string newManga) // dodati UpdateMangaDTO
+        {
+            var updatedUserInfo = await _repository.RemoveMangaFromWishlist(userId, newManga);
             if (updatedUserInfo is null)
             {
                 return NotFound(updatedUserInfo);
