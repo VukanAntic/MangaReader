@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  identitydb:
+    image: mongo
+
+  identityserver:
+    image: ${DOCKER_REGISTRY-}identityserver
+    build:
+      context: .
+      dockerfile: Security/IdentityServer/Dockerfile
+
+volumes:
+  mongo_data:
+
