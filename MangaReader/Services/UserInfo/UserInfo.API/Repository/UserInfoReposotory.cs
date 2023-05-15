@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
+﻿using AutoMapper;
+using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
+using UserInfo.API.DTOs;
 using UserInfo.API.Entities;
 
 namespace UserInfo.API.Repository
@@ -7,48 +9,41 @@ namespace UserInfo.API.Repository
     public class UserInfoReposotory : IUserInformationRepository
     {
         private readonly IDistributedCache _context;
+        private readonly IMapper _mapper;
 
-        public UserInfoReposotory(IDistributedCache context)
+        public UserInfoReposotory(IDistributedCache context, IMapper mapper)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<UserInformation> CreateUserInfo(string id)
+        public async Task<UserInfoDTO> CreateUserInfo(CreateUserInfoDTO userInfoDTO)
         {
-            var userInfo = await _context.GetStringAsync(id);
+            var userInfo = await _context.GetStringAsync(userInfoDTO.userId);
             if (!string.IsNullOrEmpty(userInfo))
             {
                 return null;
             }
 
-            var newUserInfo = JsonConvert.SerializeObject(new UserInformation(id));
-            await _context.SetStringAsync(id, newUserInfo);
+            var newUserInfo = JsonConvert.SerializeObject(new UserInformation(userInfoDTO.userId));
+            await _context.SetStringAsync(userInfoDTO.userId, newUserInfo);
 
-            return await GetUserInfo(id);
+            return await GetUserInfo(userInfoDTO.userId);
         }
 
-        public async Task<UserInformation> GetUserInfo(string id)
+        public async Task<UserInfoDTO> GetUserInfo(string id)
         {
             var userInfo = await _context.GetStringAsync(id);
             if(string.IsNullOrEmpty(userInfo))
             {
                 return null;
             }
-            return JsonConvert.DeserializeObject<UserInformation>(userInfo);
+
+            var userInfoResult = JsonConvert.DeserializeObject<UserInfoDTO>(userInfo);
+            return _mapper.Map<UserInfoDTO>(userInfoResult);
+            
         }
 
-        //public async Task<UserInformation> UpdateUserInfo(string id)
-        //{
-        //    var userInfo = await _context.GetStringAsync(id);
-        //    if (string.IsNullOrEmpty(userInfo))
-        //    {
-        //        return null;
-        //    }
-        //    //var userInfoString = JsonConvert.SerializeObject(userInformation);
-        //    //await _context.SetStringAsync(userInformation.ID, userInfoString);
-
-        //    return await GetUserInfo(id);
-        //}
         public async Task<bool> DeleteUserInfo(string id)
         {
             var userInfo = await _context.GetStringAsync(id);
@@ -60,49 +55,53 @@ namespace UserInfo.API.Repository
             return true;
         }
 
-        public async Task<UserInformation> UpdateLastReadManga(string userId, string lastReadMangaId)
+
+        public async Task<UserInfoDTO> UpdateLastReadManga(UpdateUserInfoDTO updateUserInfo)
         {
-            var userInfo = await _context.GetStringAsync(userId);
+            var userInfo = await _context.GetStringAsync(updateUserInfo.userId);
             if (string.IsNullOrEmpty(userInfo))
             {
                 return null;
             }
 
-            var deserializedUser = JsonConvert.DeserializeObject<UserInformation>(userInfo);
-            deserializedUser.ReadingJournal.LastReadMangaID = lastReadMangaId;
+            var deserializedUser = JsonConvert.DeserializeObject<UserInfoDTO>(userInfo);
+            deserializedUser.ReadingJournal.LastReadMangaID = updateUserInfo.mangaId;
 
-            await _context.SetStringAsync(userId, JsonConvert.SerializeObject(deserializedUser));
+            await _context.SetStringAsync(updateUserInfo.userId, JsonConvert.SerializeObject(deserializedUser));
 
-            return await GetUserInfo(userId);
+            return await GetUserInfo(updateUserInfo.userId);
 
         }
 
-        public async Task<UserInformation> AddMangaInAllReadMangaIds(string userId, string newManga)
+        public async Task<UserInfoDTO> AddMangaInAllReadMangaIds(UpdateUserInfoDTO userInfoDTO)
         {
-            var userInfo = await _context.GetStringAsync(userId);
+            var userInfo = await _context.GetStringAsync(userInfoDTO.userId);
             if (string.IsNullOrEmpty(userInfo))
             {
                 return null;
             }
 
-            var deserializedUser = JsonConvert.DeserializeObject<UserInformation>(userInfo);
+            var deserializedUser = JsonConvert.DeserializeObject<UserInfoDTO>(userInfo);
             var allReadMangaList = deserializedUser.ReadingJournal.AllReadMangaIDs;
-            int index = allReadMangaList.LastIndexOf(newManga);
+            var lastReadManga = deserializedUser.ReadingJournal.LastReadMangaID;    // dodato
+            int index = allReadMangaList.LastIndexOf(userInfoDTO.mangaId);
 
             if (index == -1)
             {
-                allReadMangaList.Add(newManga);
-                await _context.SetStringAsync(userId, JsonConvert.SerializeObject(deserializedUser));
+                allReadMangaList.Add(userInfoDTO.mangaId);
 
-                return await GetUserInfo(userId);
+                await _context.SetStringAsync(userInfoDTO.userId, JsonConvert.SerializeObject(deserializedUser));
+
+                return await UpdateLastReadManga(userInfoDTO);
+                //return await GetUserInfo(userInfoDTO.userId);
             }
 
-            return await GetUserInfo(userId);
+            return await GetUserInfo(userInfoDTO.userId);
         }
 
-        public async Task<UserInformation> AddMangaInWishlist(string userId, string newManga)
+        public async Task<UserInfoDTO> AddMangaInWishlist(UpdateUserInfoDTO userInfoDTO)
         {
-            var userInfo = await _context.GetStringAsync(userId);
+            var userInfo = await _context.GetStringAsync(userInfoDTO.userId);
             if (string.IsNullOrEmpty(userInfo))
             {
                 return null;
@@ -110,22 +109,22 @@ namespace UserInfo.API.Repository
 
             var deserializedUser = JsonConvert.DeserializeObject<UserInformation>(userInfo);
             var whishlist = deserializedUser.ReadingJournal.WishList;
-            int index = whishlist.LastIndexOf(newManga);
+            int index = whishlist.LastIndexOf(userInfoDTO.mangaId);
 
             if (index == -1)
             {
-                whishlist.Add(newManga);
-                await _context.SetStringAsync(userId, JsonConvert.SerializeObject(deserializedUser));
+                whishlist.Add(userInfoDTO.mangaId);
+                await _context.SetStringAsync(userInfoDTO.userId, JsonConvert.SerializeObject(deserializedUser));
 
-                return await GetUserInfo(userId);
+                return await GetUserInfo(userInfoDTO.userId);
             }
 
-            return await GetUserInfo(userId);
+            return await GetUserInfo(userInfoDTO.userId);
         }
 
-        public async Task<UserInformation> RemoveMangaFromWishlist(string userId, string newManga)
+        public async Task<UserInfoDTO> RemoveMangaFromWishlist(UpdateUserInfoDTO userInfoDTO)
         {
-            var userInfo = await _context.GetStringAsync(userId);
+            var userInfo = await _context.GetStringAsync(userInfoDTO.userId);
             if (string.IsNullOrEmpty(userInfo))
             {
                 return null;
@@ -133,17 +132,17 @@ namespace UserInfo.API.Repository
 
             var deserializedUser = JsonConvert.DeserializeObject<UserInformation>(userInfo);
             var whishlist = deserializedUser.ReadingJournal.WishList;
-            int index = whishlist.LastIndexOf(newManga);
+            int index = whishlist.LastIndexOf(userInfoDTO.mangaId);
 
             if (index == -1)
             {
-                return await GetUserInfo(userId);
+                return await GetUserInfo(userInfoDTO.userId);
             }
 
-            whishlist.Remove(newManga);
-            await _context.SetStringAsync(userId, JsonConvert.SerializeObject(deserializedUser));
+            whishlist.Remove(userInfoDTO.mangaId);
+            await _context.SetStringAsync(userInfoDTO.userId, JsonConvert.SerializeObject(deserializedUser));
 
-            return await GetUserInfo(userId);
+            return await GetUserInfo(userInfoDTO.userId);
         }
     }
 }

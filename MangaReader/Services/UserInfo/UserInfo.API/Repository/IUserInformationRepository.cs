@@ -1,16 +1,17 @@
-﻿using UserInfo.API.Entities;
+﻿using UserInfo.API.DTOs;
+using UserInfo.API.Entities;
 
 namespace UserInfo.API.Repository
 {
     public interface IUserInformationRepository
     {
-        Task<UserInformation> CreateUserInfo(string id);
-        Task<UserInformation> GetUserInfo(string id);
+        Task<UserInfoDTO> CreateUserInfo(CreateUserInfoDTO userInfoDTO);
+        Task<UserInfoDTO> GetUserInfo(string id);
         Task<bool> DeleteUserInfo(string id);
 
-        Task<UserInformation> UpdateLastReadManga(string userId, string lastReadMangaId);
-        Task<UserInformation> AddMangaInAllReadMangaIds(string userId, string newManga);
-        Task<UserInformation> AddMangaInWishlist(string userId, string newManga);
-        Task<UserInformation> RemoveMangaFromWishlist(string userId, string newManga);
+        Task<UserInfoDTO> UpdateLastReadManga(UpdateUserInfoDTO userInfoDTO);
+        Task<UserInfoDTO> AddMangaInAllReadMangaIds(UpdateUserInfoDTO userInfoDTO);
+        Task<UserInfoDTO> AddMangaInWishlist(UpdateUserInfoDTO userInfoDTO);
+        Task<UserInfoDTO> RemoveMangaFromWishlist(UpdateUserInfoDTO userInfoDTO);
     }
 }
