@@ -48,6 +48,8 @@ namespace MangaCatalog.API.Repositories
 
 
         // Could be possible that we might want to search via author name or genre name, so this might need changes
+
+        // Probably not useful
         public async Task<IEnumerable<MangaDTO>> GetMangasByAuthorId(string authorId)
         {
             using var connection = _context.GetConnection();
@@ -120,6 +122,8 @@ namespace MangaCatalog.API.Repositories
             return _mapper.Map<IEnumerable<ChapterDTO>>(chapters);
         }
 
+
+        // Probably not useful
         public async Task<AuthorDTO?> GetAuthorInfoById(string authorId)
         {
             using var connection = _context.GetConnection();

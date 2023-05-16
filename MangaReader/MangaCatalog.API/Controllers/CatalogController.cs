@@ -73,6 +73,11 @@ namespace MangaCatalog.API.Controllers
         public async Task<ActionResult<IEnumerable<Manga>>> GetAuthorPageResponse(string authorId)
         {
             var authorPageResponse = await _repository.GetAuthorPageResponseByAuthorId(authorId);
+            if(authorPageResponse is null)
+            {
+                return NotFound(null);
+            }
+
             return Ok(authorPageResponse);
         }
 
