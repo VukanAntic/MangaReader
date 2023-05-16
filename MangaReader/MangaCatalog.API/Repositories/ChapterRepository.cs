@@ -32,7 +32,7 @@ namespace MangaCatalog.API.Repositories
             return _mapper.Map<IEnumerable<ChapterDTO>>(chapters);
         }
 
-        public async Task<IEnumerable<Page>> getPagesForChapterId(string chapterId)
+        public async Task<IEnumerable<Page>> GetPagesForChapterId(string chapterId)
         {
             using var connection = _context.GetConnection();
 

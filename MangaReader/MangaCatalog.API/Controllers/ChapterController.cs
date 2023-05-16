@@ -34,7 +34,7 @@ namespace MangaCatalog.API.Controllers
         [ProducesResponseType(typeof(IEnumerable<Chapter>), StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<Chapter>>> GetPagesForChapterId(string chapterId)
         {
-            var pages = await _repository.getPagesForChapterId(chapterId);
+            var pages = await _repository.GetPagesForChapterId(chapterId);
             return Ok(pages);
 
         }
