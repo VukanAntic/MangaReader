@@ -67,6 +67,15 @@ namespace MangaCatalog.API.Controllers
             return Ok(mangas);
         }
 
+        [Route("[action]/{authorId}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Manga>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<Manga>>> GetAuthorPageResponse(string authorId)
+        {
+            var authorPageResponse = await _repository.GetAuthorPageResponseByAuthorId(authorId);
+            return Ok(authorPageResponse);
+        }
+
 
         [Route("[action]/{searchRequest}")]
         [HttpGet]

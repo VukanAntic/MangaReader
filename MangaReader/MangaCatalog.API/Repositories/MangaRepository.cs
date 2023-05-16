@@ -2,6 +2,7 @@
 using Dapper;
 using MangaCatalog.API.Data;
 using MangaCatalog.API.DTOs.Author;
+using MangaCatalog.API.DTOs.AuthorPageResponse;
 using MangaCatalog.API.DTOs.Chapter;
 using MangaCatalog.API.DTOs.Manga;
 using MangaCatalog.API.Entities;
@@ -119,7 +120,7 @@ namespace MangaCatalog.API.Repositories
             return _mapper.Map<IEnumerable<ChapterDTO>>(chapters);
         }
 
-        public async Task<AuthorDTO> GetAuthorInfoById(string authorId)
+        public async Task<AuthorDTO?> GetAuthorInfoById(string authorId)
         {
             using var connection = _context.GetConnection();
 
@@ -130,6 +131,30 @@ namespace MangaCatalog.API.Repositories
                 new { AuthorId = authorId });
 
             return _mapper.Map<AuthorDTO>(authorInfo);
+        }
+
+        public async Task<AuthorPageResponseDTO?> GetAuthorPageResponseByAuthorId(string authorId) 
+        {
+            using var connection = _context.GetConnection();
+
+            var authorInfo = await connection.QueryFirstOrDefaultAsync<Author>(
+                "SELECT * " +
+                "FROM author " +
+                "WHERE id = @AuthorId",
+                new { AuthorId = authorId });
+
+            var mangaList = await connection.QueryAsync<Manga>(
+                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId " +
+                "FROM manga " +
+                "WHERE author_id = @AuthorId",
+                new { AuthorId = authorId });
+
+            var authorPageResponse = new AuthorPageResponse{
+                AuthorInfo = authorInfo,
+                MangaList = mangaList
+            };
+
+            return _mapper.Map<AuthorPageResponseDTO>(authorPageResponse);
         }
     }
 }
