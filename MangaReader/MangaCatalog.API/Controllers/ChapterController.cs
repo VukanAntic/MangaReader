@@ -21,7 +21,7 @@ namespace MangaCatalog.API.Controllers
         [Route("[action]/{mangaId}")]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Chapter>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<Chapter>>> getAllChaptersForMangaId(string mangaId)
+        public async Task<ActionResult<IEnumerable<Chapter>>> GetAllChaptersForMangaId(string mangaId)
         {
             var chapters = await _repository.GetChaptersByMangaId(mangaId);
             return Ok(chapters);
@@ -32,7 +32,7 @@ namespace MangaCatalog.API.Controllers
         [Route("[action]/{chapterId}")]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Chapter>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<Chapter>>> getPagesForChapterId(string chapterId)
+        public async Task<ActionResult<IEnumerable<Chapter>>> GetPagesForChapterId(string chapterId)
         {
             var pages = await _repository.getPagesForChapterId(chapterId);
             return Ok(pages);

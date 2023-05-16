@@ -20,7 +20,7 @@ namespace MangaCatalog.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Manga>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<Manga>>> getMangas()
+        public async Task<ActionResult<IEnumerable<Manga>>> GetMangas()
         {
             var allMangas = await _repository.GetAllMangas();
             return Ok(allMangas);
