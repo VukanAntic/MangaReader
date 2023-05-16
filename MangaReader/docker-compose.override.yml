@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  identitydb:
+    container_name: identitydb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  identityserver:
+    container_name: identityserver
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=mongodb://identitydb:27017"
+    depends_on:
+    - identitydb
+    ports:
+      - "4000:80"
