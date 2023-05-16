@@ -9,6 +9,13 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  userInfodb:
+    container_name: userInfodb
+    restart: always
+    ports:
+      - "6379:6379"
+    
+
   identityserver:
     container_name: identityserver
     environment:
@@ -18,3 +25,13 @@ services:
     - identitydb
     ports:
       - "4000:80"
+
+  userinfo.api:
+    container_name: userinfo.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "CacheSettings:ConnectionString=userInfodb:6379"
+    depends_on:
+      - userInfodb
+    ports:
+      - "8001:80"
