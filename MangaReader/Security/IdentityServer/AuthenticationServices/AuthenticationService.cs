@@ -76,6 +76,7 @@ namespace IdentityServer.AuthenticationServices
         {
             var claims = new List<Claim>
         {
+            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Name, user.UserName), // ovde se navodi sta sve treba da ima JWT token
             new(ClaimTypes.Email, user.Email),
         };

@@ -5,6 +5,12 @@ namespace UserInfo.API.DTOs
 	{
 		public string userId { get; set; } = string.Empty;
 		public string mangaId { get; set; } = string.Empty;
-	}
+
+        public UpdateUserInfoDTO(string userId, string mangaId)
+        {
+            this.userId = userId ?? throw new ArgumentNullException(nameof(userId));
+            this.mangaId = mangaId ?? throw new ArgumentNullException(nameof(mangaId));
+        }
+    }
 }
 
