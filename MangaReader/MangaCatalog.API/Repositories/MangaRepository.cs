@@ -8,6 +8,7 @@ using MangaCatalog.API.DTOs.Genre;
 using MangaCatalog.API.DTOs.Manga;
 using MangaCatalog.API.Entities;
 using MangaCatalog.API.Repositories.Interfaces;
+using System.Threading.Tasks;
 
 namespace MangaCatalog.API.Repositories
 {
@@ -171,6 +172,16 @@ namespace MangaCatalog.API.Repositories
                 "WHERE m_g.id_manga = @MangaId", new { MangaId = mangaId});
 
             return _mapper.Map<IEnumerable<GenreDTO>>(genres);
+        }
+        public async Task<GenreDTO?> GetGenreById(string genreId) {
+            using var connection = _context.GetConnection();
+
+            var genre = await connection.QueryFirstOrDefaultAsync<Genre>(
+                "SELECT * " +
+                "FROM genre " +
+                "WHERE id = @GenreId", new { GenreId = genreId });
+
+            return _mapper.Map<GenreDTO>(genre);
         }
     }
 }

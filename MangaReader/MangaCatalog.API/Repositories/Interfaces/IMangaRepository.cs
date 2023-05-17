@@ -24,5 +24,7 @@ namespace MangaCatalog.API.Repositories.Interfaces
         Task<AuthorPageResponseDTO?> GetAuthorPageResponseByAuthorId(string authorId);
 
         Task<IEnumerable<GenreDTO>> GetAllGenresOfMangaById(string mangaId);
+
+        Task<GenreDTO?> GetGenreById(string genreId);
     }
 }
