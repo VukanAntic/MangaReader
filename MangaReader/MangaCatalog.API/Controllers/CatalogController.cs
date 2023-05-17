@@ -91,5 +91,14 @@ namespace MangaCatalog.API.Controllers
             return Ok(mangas);
         }
 
+        [Route("[action]/{mangaId}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Genre>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<Manga>>> GetAllGenresOfMangaById(string mangaId)
+        {
+            var mangas = await _repository.GetAllGenresOfMangaById(mangaId);
+            return Ok(mangas);
+        }
+
     }
 }

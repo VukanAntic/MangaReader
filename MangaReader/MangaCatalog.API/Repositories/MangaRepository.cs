@@ -4,6 +4,7 @@ using MangaCatalog.API.Data;
 using MangaCatalog.API.DTOs.Author;
 using MangaCatalog.API.DTOs.AuthorPageResponse;
 using MangaCatalog.API.DTOs.Chapter;
+using MangaCatalog.API.DTOs.Genre;
 using MangaCatalog.API.DTOs.Manga;
 using MangaCatalog.API.Entities;
 using MangaCatalog.API.Repositories.Interfaces;
@@ -159,6 +160,17 @@ namespace MangaCatalog.API.Repositories
             };
 
             return _mapper.Map<AuthorPageResponseDTO>(authorPageResponse);
+        }
+
+        public async Task<IEnumerable<GenreDTO>> GetAllGenresOfMangaById(string mangaId) { 
+            using var connection = _context.GetConnection();
+
+            var genres = await connection.QueryAsync<Genre>(
+                "SELECT * " +
+                "FROM genre g JOIN manga_genre m_g ON g.id = m_g.id_genre " +
+                "WHERE m_g.id_manga = @MangaId", new { MangaId = mangaId});
+
+            return _mapper.Map<IEnumerable<GenreDTO>>(genres);
         }
     }
 }

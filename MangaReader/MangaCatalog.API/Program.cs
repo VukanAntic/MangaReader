@@ -2,6 +2,7 @@ using MangaCatalog.API.Data;
 using MangaCatalog.API.DTOs.Author;
 using MangaCatalog.API.DTOs.AuthorPageResponse;
 using MangaCatalog.API.DTOs.Chapter;
+using MangaCatalog.API.DTOs.Genre;
 using MangaCatalog.API.DTOs.Manga;
 using MangaCatalog.API.Entities;
 using MangaCatalog.API.Repositories;
@@ -33,6 +34,11 @@ builder.Services.AddAutoMapper(configuration =>
 builder.Services.AddAutoMapper(configuration =>
 {
     configuration.CreateMap<AuthorPageResponseDTO, AuthorPageResponse>().ReverseMap();
+});
+
+builder.Services.AddAutoMapper(configuration =>
+{
+    configuration.CreateMap<GenreDTO, Genre>().ReverseMap();
 });
 
 

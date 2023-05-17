@@ -1,5 +1,6 @@
 ﻿using MangaCatalog.API.DTOs.Author;
 using MangaCatalog.API.DTOs.AuthorPageResponse;
+using MangaCatalog.API.DTOs.Genre;
 using MangaCatalog.API.DTOs.Manga;
 
 namespace MangaCatalog.API.Repositories.Interfaces
@@ -22,5 +23,6 @@ namespace MangaCatalog.API.Repositories.Interfaces
 
         Task<AuthorPageResponseDTO?> GetAuthorPageResponseByAuthorId(string authorId);
 
+        Task<IEnumerable<GenreDTO>> GetAllGenresOfMangaById(string mangaId);
     }
 }
