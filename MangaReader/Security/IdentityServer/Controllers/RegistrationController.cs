@@ -6,6 +6,7 @@ using IdentityServer.DTOs;
 using AutoMapper;
 using IdentityServer.Controllers.Base;
 using System.Data;
+using MassTransit;
 
 namespace IdentityServer.Controllers
 {
@@ -13,8 +14,8 @@ namespace IdentityServer.Controllers
     [ApiController]
     public class AuthenticationController : RegistratonControllerBase
     {
-        public AuthenticationController(ILogger<AuthenticationController> logger, UserManager<User> userManager, RoleManager<Role> roleManager, IMapper mapper) 
-            : base(logger, userManager, roleManager, mapper)
+        public AuthenticationController(ILogger<AuthenticationController> logger, UserManager<User> userManager, RoleManager<Role> roleManager, IMapper mapper, IPublishEndpoint publishEndpoint) 
+            : base(logger, userManager, roleManager, mapper, publishEndpoint)
         {
         }
 

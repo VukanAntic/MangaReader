@@ -14,15 +14,23 @@ services:
     restart: always
     ports:
       - "6379:6379"
-    
+
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+    - "5672:5672"
+    - "15672:15672"
 
   identityserver:
     container_name: identityserver
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "DatabaseSettings:ConnectionString=mongodb://identitydb:27017"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on:
     - identitydb
+    - rabbitmq
     ports:
       - "4000:80"
 
@@ -31,7 +39,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "CacheSettings:ConnectionString=userInfodb:6379"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on:
       - userInfodb
+      - rabbitmq
     ports:
       - "8001:80"

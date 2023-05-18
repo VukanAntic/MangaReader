@@ -7,6 +7,9 @@ services:
   userInfodb:
     image: redis:alpine
 
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+
   identityserver:
     image: ${DOCKER_REGISTRY-}identityserver
     build:

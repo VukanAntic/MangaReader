@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-
 using UserInfo.API.Repository;
 using AutoMapper;
 using UserInfo.API.Entities;
@@ -8,6 +7,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using MassTransit;
+using EventBus.Messages.Constants;
+using UserInfo.API.EventBusConsumers;
+using EventBus.Messages.Events;
 
 namespace UserInfo.API.Extentions
 {
@@ -29,7 +32,20 @@ namespace UserInfo.API.Extentions
             services.AddAutoMapper(configuration =>
             {
                 configuration.CreateMap<CreateUserInfoDTO, UserInformation>().ReverseMap();
+                configuration.CreateMap<CreateUserInfoDTO, UserIsCreatedEvent>().ReverseMap();
+            });
 
+            services.AddMassTransit(config =>
+            {
+                config.AddConsumer<UserIsCreatedConsumer>();
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(configuration["EventBusSettings:HostAddress"]);
+                    cfg.ReceiveEndpoint(EventBusConstants.UserIsCreatedQueue, c =>
+                    {
+                        c.ConfigureConsumer<UserIsCreatedConsumer>(ctx);
+                    });
+                });
             });
 
             return services;

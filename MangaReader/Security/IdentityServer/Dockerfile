@@ -7,6 +7,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["Security/IdentityServer/IdentityServer.csproj", "Security/IdentityServer/"]
+COPY ["Common/EventBus.Messages/EventBus.Messages.csproj", "Common/EventBus.Messages/"]
 RUN dotnet restore "Security/IdentityServer/IdentityServer.csproj"
 COPY . .
 WORKDIR "/src/Security/IdentityServer"
