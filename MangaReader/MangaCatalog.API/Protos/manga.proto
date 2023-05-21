@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-option csharp_namespace = "MangaCatalog.API.Protos";
-
-message GetMangaResponse {
-  string title = 1;
-  string cover_art = 2;	
-}
