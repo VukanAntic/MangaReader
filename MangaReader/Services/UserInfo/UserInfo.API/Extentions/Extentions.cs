@@ -50,15 +50,15 @@ namespace UserInfo.API.Extentions
                     });
                 });
 
-                config.AddConsumer<UpdateAllReadMangaConsumer>();
-                config.UsingRabbitMq((ctx, cfg) =>
-                {
-                    cfg.Host(configuration["EventBusSettings:HostAddress"]);
-                    cfg.ReceiveEndpoint(EventBusConstants.UpdateAllReadMangaQueue, c =>
-                    {
-                        c.ConfigureConsumer<UpdateAllReadMangaConsumer>(ctx);
-                    });
-                });
+                //config.AddConsumer<UpdateAllReadMangaConsumer>();
+                //config.UsingRabbitMq((ctx, cfg) =>
+                //{
+                //    cfg.Host(configuration["EventBusSettings:HostAddress"]);
+                //    cfg.ReceiveEndpoint(EventBusConstants.UpdateAllReadMangaQueue, c =>
+                //    {
+                //        c.ConfigureConsumer<UpdateAllReadMangaConsumer>(ctx);
+                //    });
+                //});
             });
 
 
