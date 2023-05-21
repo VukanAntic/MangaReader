@@ -29,7 +29,7 @@ namespace MangaCatalog.Common.Repositories
             using var connection = _context.GetConnection();
 
             var mangas = await connection.QueryAsync<Manga>(
-                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId " +
+                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId, number_of_ratings as NumberOfRatings, sum_of_ratings as SumOfRatings " +
                 "FROM manga");
 
             return _mapper.Map<IEnumerable<MangaDTO>>(mangas);
@@ -40,7 +40,7 @@ namespace MangaCatalog.Common.Repositories
             using var connection = _context.GetConnection();
 
             var manga = await connection.QueryFirstOrDefaultAsync<Manga>(
-                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId " +
+                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId, number_of_ratings as NumberOfRatings, sum_of_ratings as SumOfRatings " +
                 "FROM manga " +
                 "WHERE ID = @MangaId",
                 new { MangaId = id });
@@ -57,7 +57,7 @@ namespace MangaCatalog.Common.Repositories
             using var connection = _context.GetConnection();
 
             var mangas = await connection.QueryAsync<Manga>(
-                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId " +
+                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId, number_of_ratings as NumberOfRatings, sum_of_ratings as SumOfRatings " +
                 "FROM manga " +
                 "WHERE author_id = @AuthorId",
                 new { AuthorId = authorId });
@@ -70,7 +70,7 @@ namespace MangaCatalog.Common.Repositories
             using var connection = _context.GetConnection();
 
             var mangas = await connection.QueryAsync<Manga>(
-                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId " +
+                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId, number_of_ratings as NumberOfRatings, sum_of_ratings as SumOfRatings " +
                 "FROM manga m " +
                 "WHERE id in " +
                 "(SELECT m_g.id_manga " +
@@ -87,7 +87,7 @@ namespace MangaCatalog.Common.Repositories
             using var connection = _context.GetConnection();
 
             var mangas = await connection.QueryAsync<Manga>(
-                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId " +
+                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId, number_of_ratings as NumberOfRatings, sum_of_ratings as SumOfRatings " +
                 "FROM manga " +
                 "WHERE ID in " +
                 "(SELECT id_manga FROM manga_genre WHERE id_genre = @Genre)",
@@ -102,7 +102,7 @@ namespace MangaCatalog.Common.Repositories
 
             // TODO: FIX this search implementation
             var mangas = await connection.QueryAsync<Manga>(
-                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId " +
+                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId, number_of_ratings as NumberOfRatings, sum_of_ratings as SumOfRatings " +
                 "FROM manga " +
                 "WHERE LOWER(title) LIKE CONCAT('%',LOWER(@Query),'%')",
                 new { Query = queryString });
@@ -138,6 +138,8 @@ namespace MangaCatalog.Common.Repositories
 
             return _mapper.Map<AuthorDTO>(authorInfo);
         }
+
+
 
         // The code below was most likely a mistake and is left just in case
         /*public async Task<AuthorPageResponseDTO?> GetAuthorPageResponseByAuthorId(string authorId) 
@@ -184,5 +186,17 @@ namespace MangaCatalog.Common.Repositories
 
             return _mapper.Map<GenreDTO>(genre);
         }
+
+        public async Task<bool> AddMangaRating(string mangaId, int rating) {
+            using var connection = _context.GetConnection();
+
+            var affected = await connection.ExecuteAsync(
+                "UPDATE Manga " +
+                "SET number_of_ratings = number_of_ratings + 1,  sum_of_ratings = sum_of_ratings + @Rating " +
+                "WHERE id = @Id", new { Rating = rating, Id = mangaId });
+
+            return affected != 0;
+        }
+
     }
 }

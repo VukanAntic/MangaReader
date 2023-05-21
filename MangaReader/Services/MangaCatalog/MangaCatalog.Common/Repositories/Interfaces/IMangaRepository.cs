@@ -27,5 +27,8 @@ namespace MangaCatalog.Common.Repositories.Interfaces
         Task<IEnumerable<GenreDTO>> GetAllGenresOfMangaById(string mangaId);
 
         Task<GenreDTO?> GetGenreById(string genreId);
+
+        Task<bool> AddMangaRating(string mangaId, int rating);    
+    
     }
 }

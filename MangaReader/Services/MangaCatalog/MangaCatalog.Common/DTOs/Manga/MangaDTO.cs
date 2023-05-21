@@ -1,6 +1,6 @@
 ﻿namespace MangaCatalog.Common.DTOs.Manga
 {
-    public class MangaDTO : BaseIdentityMangaDTO
+    public class MangaDTO : BaseMangaWithRatingsDTO
     {
     }
 }

@@ -9,5 +9,7 @@
         public string CoverArt { get; set; }
         public bool ContentRating { get; set; }
         public string AuthorId { get; set; }
+        public int NumberOfRatings { get; set; }
+        public float SumOfRatings { get; set; }
     }
 }

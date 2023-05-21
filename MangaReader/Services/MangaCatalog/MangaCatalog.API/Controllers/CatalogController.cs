@@ -125,5 +125,18 @@ namespace MangaCatalog.API.Controllers
             var mangas = await _repository.GetGenreById(genreId);
             return Ok(mangas);
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        [ProducesResponseType(typeof(void), StatusCodes.Status202Accepted)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AddMangaRating([FromBody] AddMangaRatingDTO addMangaRatingDTO)
+        {
+
+            bool isUpdated = await _repository.AddMangaRating(addMangaRatingDTO.Id, addMangaRatingDTO.Rating);
+            if (isUpdated)
+                return Accepted();
+            return BadRequest();
+        }
     }
 }
