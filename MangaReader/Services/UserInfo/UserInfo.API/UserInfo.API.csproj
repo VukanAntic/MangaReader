@@ -33,7 +33,4 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EventBusConsumers\" />
-  </ItemGroup>
 </Project>

@@ -11,7 +11,6 @@
     <None Remove="Constants\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Events\" />
     <Folder Include="Constants\" />
   </ItemGroup>
 </Project>
