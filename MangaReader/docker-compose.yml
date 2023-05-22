@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  mangacatalog.api:
+    image: ${DOCKER_REGISTRY-}mangacatalogapi
+    build:
+      context: .
+      dockerfile: Services/MangaCatalog/MangaCatalog.API/Dockerfile

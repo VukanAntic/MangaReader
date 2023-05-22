@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  mangacatalog.api:
+    container_name: mangacatalog.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8000:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
