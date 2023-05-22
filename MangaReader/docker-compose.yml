@@ -6,3 +6,27 @@ services:
     build:
       context: .
       dockerfile: Services/MangaCatalog/MangaCatalog.API/Dockerfile
+
+  identitydb:
+    image: mongo
+
+  userInfodb:
+    image: redis:alpine
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+
+  identityserver:
+    image: ${DOCKER_REGISTRY-}identityserver
+    build:
+      context: .
+      dockerfile: Security/IdentityServer/Dockerfile
+
+  userinfo.api:
+    image: ${DOCKER_REGISTRY-}userinfoapi
+    build:
+      context: .
+      dockerfile: Services/UserInfo/UserInfo.API/Dockerfile
+
+volumes:
+  mongo_data:

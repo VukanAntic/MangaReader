@@ -1,4 +1,5 @@
-using IdentityServer.Extentions;
+using UserInfo.API.Extentions;
+using UserInfo.API.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,16 +10,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// We replaced this with builder.Services.ConfigureJWT()
-// builder.Services.AddAuthentication();
-
-//Connecting to MongoDB
-builder.Services.ConfigurePersistence(builder.Configuration);
-// Mapping UserDTO - User and RoleDTO - Role
+// Connecting to ReddisDB
+builder.Services.ConfigureReddisDataBase(builder.Configuration);
 builder.Services.Mapper(builder.Configuration);
-// Configure JWT
 builder.Services.ConfigureJWT(builder.Configuration);
-// Add other services
 builder.Services.ConfigureMiscellaneousServices();
 
 var app = builder.Build();
@@ -29,8 +24,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

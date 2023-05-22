@@ -9,3 +9,49 @@ services:
       - "8000:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+  identitydb:
+    container_name: identitydb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  userInfodb:
+    container_name: userInfodb
+    restart: always
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+    - "5672:5672"
+    - "15672:15672"
+
+  identityserver:
+    container_name: identityserver
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=mongodb://identitydb:27017"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    depends_on:
+    - identitydb
+    - rabbitmq
+    ports:
+      - "4000:80"
+
+  userinfo.api:
+    container_name: userinfo.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "CacheSettings:ConnectionString=userInfodb:6379"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    depends_on:
+      - userInfodb
+      - rabbitmq
+    ports:
+      - "8001:80"
+
