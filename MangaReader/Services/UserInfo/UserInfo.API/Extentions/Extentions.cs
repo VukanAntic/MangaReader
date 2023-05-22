@@ -41,6 +41,8 @@ namespace UserInfo.API.Extentions
             services.AddMassTransit(config =>
             {
                 config.AddConsumer<UserIsCreatedConsumer>();
+                config.AddConsumer<UpdateAllReadMangaConsumer>();
+
                 config.UsingRabbitMq((ctx, cfg) =>
                 {
                     cfg.Host(configuration["EventBusSettings:HostAddress"]);
@@ -48,19 +50,12 @@ namespace UserInfo.API.Extentions
                     {
                         c.ConfigureConsumer<UserIsCreatedConsumer>(ctx);
                     });
-                });
-
-                //config.AddConsumer<UpdateAllReadMangaConsumer>();
-                //config.UsingRabbitMq((ctx, cfg) =>
-                //{
-                //    cfg.Host(configuration["EventBusSettings:HostAddress"]);
-                //    cfg.ReceiveEndpoint(EventBusConstants.UpdateAllReadMangaQueue, c =>
-                //    {
-                //        c.ConfigureConsumer<UpdateAllReadMangaConsumer>(ctx);
-                //    });
-                //});
+                    cfg.ReceiveEndpoint(EventBusConstants.UpdateAllReadMangaQueue, c =>
+                    {
+                        c.ConfigureConsumer<UpdateAllReadMangaConsumer>(ctx);
+                    });
+                });                
             });
-
 
 
             return services;
