@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using EventBus.Messages.Events;
 using IdentityServer.DTOs;
 using IdentityServer.Entities;
+using MassTransit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,13 +14,15 @@ namespace IdentityServer.Controllers.Base
         protected readonly UserManager<User> _userManager;
         protected readonly RoleManager<Role> _roleManager;
         protected readonly IMapper _mapper;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public RegistratonControllerBase(ILogger<AuthenticationController> logger, UserManager<User> userManager, RoleManager<Role> roleManager, IMapper mapper)
+        public RegistratonControllerBase(ILogger<AuthenticationController> logger, UserManager<User> userManager, RoleManager<Role> roleManager, IMapper mapper, IPublishEndpoint publishEndpoint)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _publishEndpoint = publishEndpoint ?? throw new ArgumentNullException(nameof(publishEndpoint));
         }
 
         protected async Task<IActionResult> RegisterNewUserWithRoles(UserCreateDTO user, string[] roles)
@@ -48,6 +52,14 @@ namespace IdentityServer.Controllers.Base
                         {
                             // Ne smatra se greskom!
                         }
+
+                        var createdUser = await _userManager.FindByNameAsync(user.UserName);
+                        var userId = createdUser.Id;
+
+                        UserIsCreatedEvent toSend = new UserIsCreatedEvent(userId);
+                        await _publishEndpoint.Publish(toSend);
+
+                        _logger.LogInformation("Sent newly created user to UserInfo servis with id {createdUser}.", userId);
 
                         return StatusCode(StatusCodes.Status201Created);
                     }

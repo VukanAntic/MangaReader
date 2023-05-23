@@ -13,6 +13,7 @@ builder.Services.AddSwaggerGen();
 // Connecting to ReddisDB
 builder.Services.ConfigureReddisDataBase(builder.Configuration);
 builder.Services.Mapper(builder.Configuration);
+builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.ConfigureMiscellaneousServices();
 
 var app = builder.Build();
@@ -24,6 +25,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

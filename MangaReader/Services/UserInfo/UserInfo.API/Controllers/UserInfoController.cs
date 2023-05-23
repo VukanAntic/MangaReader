@@ -2,27 +2,35 @@
 using UserInfo.API.Entities;
 using UserInfo.API.Repository;
 using UserInfo.API.DTOs;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace UserInfo.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class UserInfoController : ControllerBase
     {
         private readonly IUserInformationRepository _repository;
+        private readonly ILogger<UserInfoController> _logger;
 
-        public UserInfoController(IUserInformationRepository repository)
+        public UserInfoController(IUserInformationRepository repository, ILogger<UserInfoController> logger)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [Route("[action]")]
         [HttpPost]
         [ProducesResponseType(typeof(UserInformation), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(UserInformation), StatusCodes.Status409Conflict)]
-        public async Task<ActionResult<UserInfoDTO>> CreateUser([FromBody] CreateUserInfoDTO userInfoDTO) 
+        public async Task<ActionResult<UserInfoDTO>> CreateUser() 
         {
-            var userInfo = await _repository.CreateUserInfo(userInfoDTO);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var userInfo = await _repository.CreateUserInfo(new CreateUserInfoDTO(userId));
             if(userInfo is null)
             {
                 return Conflict(userInfo);
@@ -30,12 +38,14 @@ namespace UserInfo.API.Controllers
             return Ok(userInfo);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
         [ProducesResponseType(typeof(UserInformation), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(UserInformation), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserInfoDTO>> GetUserInfo(string id) 
+        public async Task<ActionResult<UserInfoDTO>> GetUserInfo() 
         {
-            var userInfo = await _repository.GetUserInfo(id);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var userInfo = await _repository.GetUserInfo(userId);
             if(userInfo is null)
             {
                 return NotFound();
@@ -46,9 +56,11 @@ namespace UserInfo.API.Controllers
         [HttpDelete]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(UserInfoDTO), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteUserInfo(string id)
+        public async Task<IActionResult> DeleteUserInfo()
         {
-            var result = await _repository.DeleteUserInfo(id);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var result = await _repository.DeleteUserInfo(userId);
             if (result)
             {
                 return Ok();
@@ -60,9 +72,11 @@ namespace UserInfo.API.Controllers
         [HttpPut]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(UserInfoDTO), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserInfoDTO>> UpdateLastReadManga(UpdateUserInfoDTO userInfoDTO) 
+        public async Task<ActionResult<UserInfoDTO>> UpdateLastReadManga([FromBody] InputData inputData) 
         {
-            var updatedUserInfo = await _repository.UpdateLastReadManga(userInfoDTO);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var updatedUserInfo = await _repository.UpdateLastReadManga(new UpdateUserInfoDTO(userId, inputData.mangaId));
+
             if (updatedUserInfo is null)
             {
                 return NotFound(updatedUserInfo);
@@ -76,9 +90,11 @@ namespace UserInfo.API.Controllers
         [HttpPut]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(UserInfoDTO), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserInfoDTO>> AddMangaInAllReadMangaIds(UpdateUserInfoDTO userInfoDTO) 
+        public async Task<ActionResult<UserInfoDTO>> AddMangaInAllReadMangaIds([FromBody] InputData inputData) 
         {
-            var updatedUserInfo = await _repository.AddMangaInAllReadMangaIds(userInfoDTO);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var updatedUserInfo = await _repository.AddMangaInAllReadMangaIds(new UpdateUserInfoDTO(userId, inputData.mangaId));
+
             if (updatedUserInfo is null)
             {
                 return NotFound(updatedUserInfo);
@@ -90,9 +106,11 @@ namespace UserInfo.API.Controllers
         [HttpPut]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(UserInfoDTO), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserInfoDTO>> AddMangaInWishlist(UpdateUserInfoDTO userInfoDTO) 
+        public async Task<ActionResult<UserInfoDTO>> AddMangaInWishlist([FromBody] InputData inputData) 
         {
-            var updatedUserInfo = await _repository.AddMangaInWishlist(userInfoDTO);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var updatedUserInfo = await _repository.AddMangaInWishlist(new UpdateUserInfoDTO(userId, inputData.mangaId));
+
             if (updatedUserInfo is null)
             {
                 return NotFound(updatedUserInfo);
@@ -105,9 +123,11 @@ namespace UserInfo.API.Controllers
         [HttpPut]
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(UserInfoDTO), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserInfoDTO>> RemoveMangaFromWishlist(UpdateUserInfoDTO userInfoDTO) 
+        public async Task<ActionResult<UserInfoDTO>> RemoveMangaFromWishlist([FromBody] InputData inputData) 
         {
-            var updatedUserInfo = await _repository.RemoveMangaFromWishlist(userInfoDTO);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var updatedUserInfo = await _repository.RemoveMangaFromWishlist(new UpdateUserInfoDTO(userId, inputData.mangaId));
+
             if (updatedUserInfo is null)
             {
                 return NotFound(updatedUserInfo);

@@ -15,6 +15,7 @@ using IdentityServer.Data.Interfaces;
 using IdentityServer.Data;
 using IdentityServer.Repositories.Interfaces;
 using IdentityServer.Repositories;
+using MassTransit;
 
 namespace IdentityServer.Extentions
 {
@@ -57,6 +58,14 @@ namespace IdentityServer.Extentions
                 configuration.CreateMap<RoleCreateDTO, Role>().ReverseMap();
                 configuration.CreateMap<UserCredentialsDTO, User>().ReverseMap();
                 configuration.CreateMap<UserDetailsDTO, User>().ReverseMap();
+            });
+
+            services.AddMassTransit(config =>
+            {
+                config.UsingRabbitMq((_, cfg) =>
+                {
+                    cfg.Host(configuration["EventBusSettings:HostAddress"]);
+                });
             });
 
             return services;
