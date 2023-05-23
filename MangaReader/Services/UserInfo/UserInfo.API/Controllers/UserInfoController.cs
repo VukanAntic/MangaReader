@@ -14,10 +14,12 @@ namespace UserInfo.API.Controllers
     public class UserInfoController : ControllerBase
     {
         private readonly IUserInformationRepository _repository;
+        private readonly ILogger<UserInfoController> _logger;
 
-        public UserInfoController(IUserInformationRepository repository)
+        public UserInfoController(IUserInformationRepository repository, ILogger<UserInfoController> logger)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         [Route("[action]")]

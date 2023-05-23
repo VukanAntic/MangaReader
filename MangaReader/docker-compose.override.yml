@@ -1,15 +1,6 @@
 version: '3.4'
 
 services:
-  mangacatalog.api:
-    container_name: mangacatalog.api
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "8000:80"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-
   identitydb:
     container_name: identitydb
     restart: always
@@ -54,4 +45,14 @@ services:
       - rabbitmq
     ports:
       - "8001:80"
+
+  mangacatalog.api:
+    container_name: mangacatalog.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    ports:
+      - "8000:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
 

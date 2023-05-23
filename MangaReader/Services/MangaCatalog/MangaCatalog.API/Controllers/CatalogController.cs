@@ -1,22 +1,33 @@
-﻿using MangaCatalog.Common.DTOs.Author;
+﻿using AutoMapper;
+using EventBus.Messages.Events;
+using MangaCatalog.Common.DTOs.Author;
 using MangaCatalog.Common.DTOs.Genre;
 using MangaCatalog.Common.DTOs.Manga;
 using MangaCatalog.Common.Repositories.Interfaces;
+using MassTransit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace MangaCatalog.API.Controllers
 {
-
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CatalogController : ControllerBase
     {
 
         private readonly IMangaRepository _repository;
+        private readonly ILogger<CatalogController> _logger;
+        private readonly IMapper _mapper;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public CatalogController(IMangaRepository repository)
+        public CatalogController(IMangaRepository repository, ILogger<CatalogController> logger, IMapper mapper, IPublishEndpoint publishEndpoint)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _publishEndpoint = publishEndpoint ?? throw new ArgumentNullException(nameof(publishEndpoint));
         }
 
         [HttpGet]
@@ -27,6 +38,7 @@ namespace MangaCatalog.API.Controllers
             return Ok(allMangas);
         }
 
+        
         [HttpGet("{id}", Name = "GetManga")]
         [ProducesResponseType(typeof(MangaDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(MangaDTO), StatusCodes.Status404NotFound)]
@@ -37,6 +49,13 @@ namespace MangaCatalog.API.Controllers
             {
                 return NotFound(null);
             }
+
+            var mangaId = manga.Id;
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            
+            UpdateAllReadMangaEvent eventMessage = new UpdateAllReadMangaEvent(userId, mangaId);
+            await _publishEndpoint.Publish(eventMessage);
+
             return Ok(manga);
         }
 

@@ -4,7 +4,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddMangaCatalogCommonServices();
+builder.Services.AddMangaCatalogCommonServices(builder.Configuration);
+builder.Services.ConfigureJWT(builder.Configuration);
 
 
 builder.Services.AddControllers();
@@ -21,6 +22,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

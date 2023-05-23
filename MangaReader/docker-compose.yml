@@ -1,12 +1,6 @@
 version: '3.4'
 
 services:
-  mangacatalog.api:
-    image: ${DOCKER_REGISTRY-}mangacatalogapi
-    build:
-      context: .
-      dockerfile: Services/MangaCatalog/MangaCatalog.API/Dockerfile
-
   identitydb:
     image: mongo
 
@@ -15,6 +9,12 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
+
+  mangacatalog.api:
+    image: ${DOCKER_REGISTRY-}mangacatalogapi
+    build:
+      context: .
+      dockerfile: Services/MangaCatalog/MangaCatalog.API/Dockerfile
 
   identityserver:
     image: ${DOCKER_REGISTRY-}identityserver
