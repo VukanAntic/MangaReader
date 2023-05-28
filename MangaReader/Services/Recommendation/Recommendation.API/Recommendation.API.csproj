@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\..\MangaCatalog\MangaCatalog.Common\MangaCatalog.Common.csproj" />
   </ItemGroup>
 
 </Project>
