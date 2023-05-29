@@ -8,9 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using MassTransit;
-using EventBus.Messages.Constants;
-using UserInfo.API.EventBusConsumers;
 using EventBus.Messages.Events;
+using UserInfo.API.EventBusConsumers;
+using EventBus.Messages.Constants;
 
 namespace UserInfo.API.Extentions
 {

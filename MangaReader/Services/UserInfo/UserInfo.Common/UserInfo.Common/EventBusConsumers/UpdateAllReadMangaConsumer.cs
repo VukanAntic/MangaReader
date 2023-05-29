@@ -4,6 +4,7 @@ using EventBus.Messages.Events;
 using UserInfo.API.Repository;
 using System.Security.Claims;
 using UserInfo.API.DTOs;
+using Microsoft.Extensions.Logging;
 
 namespace UserInfo.API.EventBusConsumers
 {
