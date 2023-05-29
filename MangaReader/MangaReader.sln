@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{3B6842
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Messages", "Common\EventBus.Messages\EventBus.Messages.csproj", "{62A680A8-5A2B-47F2-B754-6CB0374D0158}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInfo.Common", "Services\UserInfo\UserInfo.Common\UserInfo.Common\UserInfo.Common.csproj", "{A00FE27E-802D-416B-AF12-E8A8ABECA20A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{62A680A8-5A2B-47F2-B754-6CB0374D0158}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62A680A8-5A2B-47F2-B754-6CB0374D0158}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62A680A8-5A2B-47F2-B754-6CB0374D0158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A00FE27E-802D-416B-AF12-E8A8ABECA20A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A00FE27E-802D-416B-AF12-E8A8ABECA20A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A00FE27E-802D-416B-AF12-E8A8ABECA20A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A00FE27E-802D-416B-AF12-E8A8ABECA20A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{E2B37FC3-6B2B-41BA-8A5F-F490E3A63FFC} = {C0E36FAA-698B-462F-AEFF-09429D652B97}
 		{C0E36FAA-698B-462F-AEFF-09429D652B97} = {2ACB767C-7A37-476C-9EB6-6F1D1B6F105A}
 		{62A680A8-5A2B-47F2-B754-6CB0374D0158} = {3B684297-9840-4272-BDA1-5D7E5AC1421A}
+		{A00FE27E-802D-416B-AF12-E8A8ABECA20A} = {C0E36FAA-698B-462F-AEFF-09429D652B97}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {054325B2-841E-4B55-9C9B-225E4BBE48D0}

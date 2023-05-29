@@ -3,6 +3,7 @@ using AutoMapper;
 using EventBus.Messages.Events;
 using MassTransit;
 using MassTransit.Mediator;
+using Microsoft.Extensions.Logging;
 using UserInfo.API.DTOs;
 using UserInfo.API.Repository;
 
