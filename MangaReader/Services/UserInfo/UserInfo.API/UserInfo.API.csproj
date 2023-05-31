@@ -24,6 +24,6 @@
     <ProjectReference Include="..\..\..\Common\EventBus.Messages\EventBus.Messages.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="..\UserInfo.Common\UserInfo.Common\UserInfo.Common.csproj" />
+    <ProjectReference Include="..\UserInfo.Common\UserInfo.Common.csproj" />
   </ItemGroup>
 </Project>
