@@ -2,13 +2,11 @@
 using Dapper;
 using MangaCatalog.Common.Data;
 using MangaCatalog.Common.DTOs.Author;
-using MangaCatalog.Common.DTOs.AuthorPageResponse;
 using MangaCatalog.Common.DTOs.Chapter;
 using MangaCatalog.Common.DTOs.Genre;
 using MangaCatalog.Common.DTOs.Manga;
 using MangaCatalog.Common.Entities;
 using MangaCatalog.Common.Repositories.Interfaces;
-using System.Threading.Tasks;
 
 namespace MangaCatalog.Common.Repositories
 {
@@ -46,6 +44,26 @@ namespace MangaCatalog.Common.Repositories
                 new { MangaId = id });
 
             return _mapper.Map<MangaDTO>(manga);
+        }
+
+        public async Task<IEnumerable<MangaDTO>> GetMangasByIds(IEnumerable<string> ids)
+        {
+            using var connection = _context.GetConnection();
+
+            var mangas = new List<MangaDTO>();
+
+            foreach (var id in ids)
+            {
+                var manga = await connection.QueryFirstOrDefaultAsync<Manga>(
+                "SELECT id, title, description, status, cover_art as coverArt, content_rating as contentRating, author_id as authorId, number_of_ratings as NumberOfRatings, sum_of_ratings as SumOfRatings " +
+                "FROM manga " +
+                "WHERE ID = @MangaId",
+                new { MangaId = id });
+
+                mangas.Add(_mapper.Map<MangaDTO>(manga));
+            }
+                    
+            return mangas;
         }
 
 

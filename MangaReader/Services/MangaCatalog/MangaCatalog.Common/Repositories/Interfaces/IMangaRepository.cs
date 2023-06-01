@@ -11,6 +11,8 @@ namespace MangaCatalog.Common.Repositories.Interfaces
 
         Task<MangaDTO?> GetMangaById(string id);
 
+        Task<IEnumerable<MangaDTO>> GetMangasByIds(IEnumerable<string> ids);
+
         Task<IEnumerable<MangaDTO>> GetMangasByGenreId(string genreId);
 
         Task<IEnumerable<MangaDTO>> GetMangasByGenreName(string genreName);
