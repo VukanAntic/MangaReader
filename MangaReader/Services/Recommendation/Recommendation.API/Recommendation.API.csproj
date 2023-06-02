@@ -7,11 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\MangaCatalog\MangaCatalog.Common\MangaCatalog.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\..\MangaCatalog\MangaCatalog.GRPC\Protos\manga.proto" GrpcServices="Client">
+      <Link>Protos\manga.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>
