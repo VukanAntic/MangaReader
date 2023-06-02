@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "MangaCatalog.GRPC.Protos";
+
+service MangaProtoService {
+	rpc GetManga (GetMangaRequest) returns (GetMangaResponse);
+	rpc GetMangas (GetMangasRequest) returns (GetMangasResponse);
+}
+
+message Manga{
+	string id = 1;
+	string title = 2;
+	string description = 3;
+	string status = 4;
+    string coverArt = 5;
+    bool contentRating = 6;
+    string authorId = 7;
+    int32 numberOfRatings = 8;
+    float sumOfRatings = 9;
+}
+
+message GetMangaRequest{
+	string mangaId = 1;
+}
+
+message GetMangaResponse{
+	Manga manga = 1;
+}
+
+message GetMangasRequest{
+	repeated string ids = 1;
+}
+
+message GetMangasResponse{
+	repeated Manga mangas = 1;
+}
