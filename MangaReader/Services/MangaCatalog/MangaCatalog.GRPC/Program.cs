@@ -11,10 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddGrpc();
 builder.Services.AddMangaCatalogCommonServices(builder.Configuration);
-builder.Services.AddAutoMapper(configuration =>
-{
-    configuration.CreateMap<MangaDTO, Manga>().ReverseMap();
-});
+builder.Services.AddMangaGrpcMaps(builder.Configuration);
 
 var app = builder.Build();
 

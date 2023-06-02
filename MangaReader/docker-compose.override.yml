@@ -66,3 +66,5 @@ services:
       - "8002:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+# When we add dockerization for the Recommendation.API we need to add the following line into the environment section : "GrpcSettings:MangaUrl=http://mangacatalog.grpc"

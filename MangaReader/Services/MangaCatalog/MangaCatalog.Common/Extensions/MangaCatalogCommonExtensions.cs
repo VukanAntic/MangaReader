@@ -64,6 +64,12 @@ namespace MangaCatalog.Common.Extensions
 
         }
 
+        public static void AddMangaGrpcMaps(this IServiceCollection services, IConfiguration configuration) {
+            services.AddAutoMapper(configuration => {
+                configuration.CreateMap<MangaDTO, Manga>().ReverseMap();
+            });
+        }
+
 
         public static IServiceCollection ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
         {
