@@ -28,7 +28,7 @@ message GetMangaResponse{
 }
 
 message GetMangasRequest{
-	repeated string ids = 1;
+	repeated string mangaIds = 1;
 }
 
 message GetMangasResponse{
