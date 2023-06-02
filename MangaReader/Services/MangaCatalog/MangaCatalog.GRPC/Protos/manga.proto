@@ -5,6 +5,7 @@ option csharp_namespace = "MangaCatalog.GRPC.Protos";
 service MangaProtoService {
 	rpc GetManga (GetMangaRequest) returns (GetMangaResponse);
 	rpc GetMangas (GetMangasRequest) returns (GetMangasResponse);
+	rpc GetMangaGenres (GetMangaGrenresRequest) returns (GetMangaGenresResponse);
 }
 
 message Manga{
@@ -33,4 +34,16 @@ message GetMangasRequest{
 
 message GetMangasResponse{
 	repeated Manga mangas = 1;
+}
+
+message GetMangaGrenresRequest{
+	string mangaId = 1;
+}
+
+message GetMangaGenresResponse{
+	message Genre {
+		string genreId = 1;
+		string genreName = 2;
+	}
+	repeated Genre genres = 1;
 }

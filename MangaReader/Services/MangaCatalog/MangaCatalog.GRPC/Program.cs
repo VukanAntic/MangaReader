@@ -1,3 +1,4 @@
+using MangaCatalog.Common.DTOs.Genre;
 using MangaCatalog.Common.DTOs.Manga;
 using MangaCatalog.Common.Extensions;
 using MangaCatalog.GRPC.Protos;
@@ -11,7 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddGrpc();
 builder.Services.AddMangaCatalogCommonServices(builder.Configuration);
-builder.Services.AddMangaGrpcMaps(builder.Configuration);
+builder.Services.AddAutoMapper(configuration => {
+    configuration.CreateMap<MangaDTO, Manga>().ReverseMap();
+});
+builder.Services.AddAutoMapper(configuration => {
+    configuration.CreateMap<GenreDTO, GetMangaGenresResponse.Types.Genre>().ReverseMap();
+});
 
 var app = builder.Build();
 

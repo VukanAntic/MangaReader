@@ -42,5 +42,16 @@ namespace MangaCatalog.GRPC.Services
 
             return response;
         }
+
+        public override async Task<GetMangaGenresResponse> GetMangaGenres(GetMangaGrenresRequest request, ServerCallContext context)
+        {
+            var genres = await _repository.GetAllGenresOfMangaById(request.MangaId)
+                                ?? throw new RpcException(new Status(StatusCode.NotFound, $"Genres for manga with ID = {request.MangaId} not found"));
+
+            var response = new GetMangaGenresResponse();
+            response.Genres.AddRange(_mapper.Map<IEnumerable<GetMangaGenresResponse.Types.Genre>>(genres));
+
+            return response;
+        }
     }
 }
