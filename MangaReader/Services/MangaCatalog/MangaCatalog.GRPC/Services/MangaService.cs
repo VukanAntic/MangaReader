@@ -2,7 +2,6 @@
 using Grpc.Core;
 using MangaCatalog.Common.Repositories.Interfaces;
 using MangaCatalog.GRPC.Protos;
-using Microsoft.Extensions.Logging;
 
 namespace MangaCatalog.GRPC.Services
 {

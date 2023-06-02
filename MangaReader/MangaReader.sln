@@ -30,7 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Recommendation", "Recommend
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recommendation.API", "Services\Recommendation\Recommendation.API\Recommendation.API.csproj", "{60DE78D3-6BB4-4819-9001-78B499E3DC96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaCatalog.GRPC", "Services\MangaCatalog\MangaCatalog.GRPC\MangaCatalog.GRPC\MangaCatalog.GRPC.csproj", "{426A52FE-80F1-487F-B5F1-139D33029E15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaCatalog.GRPC", "Services\MangaCatalog\MangaCatalog.GRPC\MangaCatalog.GRPC.csproj", "{6B113E9E-871F-431D-906F-0A57EDA2F731}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,10 +70,10 @@ Global
 		{60DE78D3-6BB4-4819-9001-78B499E3DC96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60DE78D3-6BB4-4819-9001-78B499E3DC96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60DE78D3-6BB4-4819-9001-78B499E3DC96}.Release|Any CPU.Build.0 = Release|Any CPU
-		{426A52FE-80F1-487F-B5F1-139D33029E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{426A52FE-80F1-487F-B5F1-139D33029E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{426A52FE-80F1-487F-B5F1-139D33029E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{426A52FE-80F1-487F-B5F1-139D33029E15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B113E9E-871F-431D-906F-0A57EDA2F731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B113E9E-871F-431D-906F-0A57EDA2F731}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B113E9E-871F-431D-906F-0A57EDA2F731}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B113E9E-871F-431D-906F-0A57EDA2F731}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,7 +89,7 @@ Global
 		{0FD3E672-AC68-4FC8-920C-38191B781C27} = {C0E36FAA-698B-462F-AEFF-09429D652B97}
 		{0DDBA67E-F5F5-49DD-AAD4-F9B09F8DE454} = {2ACB767C-7A37-476C-9EB6-6F1D1B6F105A}
 		{60DE78D3-6BB4-4819-9001-78B499E3DC96} = {0DDBA67E-F5F5-49DD-AAD4-F9B09F8DE454}
-		{426A52FE-80F1-487F-B5F1-139D33029E15} = {718C43DE-A8CB-4077-A055-0676DE961E85}
+		{6B113E9E-871F-431D-906F-0A57EDA2F731} = {718C43DE-A8CB-4077-A055-0676DE961E85}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {054325B2-841E-4B55-9C9B-225E4BBE48D0}
