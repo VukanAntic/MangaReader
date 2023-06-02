@@ -31,5 +31,19 @@ namespace Recommendation.API.GrpcServices
             genreRequest.MangaId = mangaId;
             return await _mangaProtoServiceClient.GetMangaGenresAsync(genreRequest);
         }
+
+        public async Task<GetMangasByAuthorIdResponse> GetMangasByAuthorId(string authorId)
+        {
+            var mangasRequest = new GetMangasByAuthorIdRequest();
+            mangasRequest.AuthorId = authorId;
+            return await _mangaProtoServiceClient.GetMangasByAuthorIdAsync(mangasRequest);
+        }
+
+        public async Task<GetMangasByGenreIdResponse> GetMangasByGenreId(string genreId)
+        {
+            var mangasRequest = new GetMangasByGenreIdRequest();
+            mangasRequest.GenreId = genreId;
+            return await _mangaProtoServiceClient.GetMangasByGenreIdAsync(mangasRequest);
+        }
     }
 }

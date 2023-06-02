@@ -53,5 +53,25 @@ namespace MangaCatalog.GRPC.Services
 
             return response;
         }
+
+        public override async Task<GetMangasByAuthorIdResponse> GetMangasByAuthorId(GetMangasByAuthorIdRequest request, ServerCallContext context)
+        {
+            var mangas = await _repository.GetMangasByAuthorId(request.AuthorId)
+                                ?? throw new RpcException(new Status(StatusCode.NotFound, $"Mangas for author with ID = {request.AuthorId} not found"));
+            var response = new GetMangasByAuthorIdResponse();
+            response.Mangas.AddRange(_mapper.Map<IEnumerable<Manga>>(mangas));
+
+            return response;
+        }
+
+        public override async Task<GetMangasByGenreIdResponse> GetMangasByGenreId(GetMangasByGenreIdRequest request, ServerCallContext context)
+        {
+            var mangas = await _repository.GetMangasByGenreId(request.GenreId)
+                                ?? throw new RpcException(new Status(StatusCode.NotFound, $"Mangas for genre with ID = {request.GenreId} not found"));
+            var response = new GetMangasByGenreIdResponse();
+            response.Mangas.AddRange(_mapper.Map<IEnumerable<Manga>>(mangas));
+
+            return response;
+        }
     }
 }

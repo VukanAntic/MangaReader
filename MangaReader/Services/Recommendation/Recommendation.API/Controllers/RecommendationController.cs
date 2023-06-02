@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MangaCatalog.Common.DTOs.Manga;
+using MangaCatalog.GRPC.Protos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Recommendation.API.Contexts;
@@ -27,6 +28,7 @@ namespace Recommendation.API.Controllers
         [Route("[action]")]
         [HttpGet]
         [ProducesResponseType(typeof(RecommendationPageDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(RecommendationPageDTO), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<RecommendationPageDTO>> GetRecommendationPage(string userId)
         {
             // Current plan: Use controler to create and fill a RecommendationPageDTO object with information using awailable methods from the _context object.
@@ -45,6 +47,11 @@ namespace Recommendation.API.Controllers
             IEnumerable<MangaDTO> readListMangas = _mapper.Map<IEnumerable<MangaDTO>>(readMangaResponse.Mangas);
             IEnumerable<MangaDTO> wishListMangas = _mapper.Map<IEnumerable<MangaDTO>>(wishMangaResponse.Mangas);
 
+            if (readListMangas.Count() == 0 || wishListMangas.Count() == 0)
+            {
+                return NotFound(null);
+            }
+
             // getting all the genres to find the favourite
             var genreIdList = new List<string>();
 
@@ -60,8 +67,14 @@ namespace Recommendation.API.Controllers
             var favouriteGenreId = _context.GetFavouriteGenreId(genreIdList);
 
             // this is were we'll call _mangaGrpcService.GetMangasByGenreId and _mangaGrpcService.GetMangasByAuthorId to get the recommended mangas
+            var favouriteAuthorMangasResponse = await _mangaGrpcService.GetMangasByAuthorId(favouriteAuthorId);
+            var favouriteGenreMangasResponse = await _mangaGrpcService.GetMangasByGenreId(favouriteGenreId);
+
+            IEnumerable<MangaDTO> favouriteAuthorMangas = _mapper.Map<IEnumerable<MangaDTO>>(favouriteAuthorMangasResponse.Mangas);
+            IEnumerable<MangaDTO> favouriteGenreMangas = _mapper.Map<IEnumerable<MangaDTO>>(favouriteGenreMangasResponse.Mangas);    
 
             var recommendationPage = new RecommendationPageDTO();
+
 
             return Ok(recommendationPage);
         }

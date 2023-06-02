@@ -1,10 +1,11 @@
 ﻿using MangaCatalog.Common.DTOs.Manga;
+using System.Linq;
 
 namespace Recommendation.API.Contexts
 {
     public class RecommendationContext : IRecommendationContext
     {
-        public string? GetFavouriteAuthorId(IEnumerable<MangaDTO> readList, IEnumerable<MangaDTO> wishList)
+        public string GetFavouriteAuthorId(IEnumerable<MangaDTO> readList, IEnumerable<MangaDTO> wishList)
         {
             var authorCount = new Dictionary<string, int>();
 
@@ -30,7 +31,7 @@ namespace Recommendation.API.Contexts
                 }
             }
 
-            string favouriteAuthorId = null;
+            string favouriteAuthorId = readList.First().AuthorId;
             int authorNumber = 0;
 
             foreach(var kvp in authorCount)
@@ -45,7 +46,7 @@ namespace Recommendation.API.Contexts
             return favouriteAuthorId;
         }
 
-        public string? GetFavouriteGenreId(IEnumerable<string> genreIdList)
+        public string GetFavouriteGenreId(IEnumerable<string> genreIdList)
         {
             var genreCount = new Dictionary<string, int>();
 
@@ -61,7 +62,7 @@ namespace Recommendation.API.Contexts
                 }
             }
 
-            string favouriteGenre = null;
+            string favouriteGenre = genreIdList.First();
             int genreNumber = 0;
 
             foreach (var kvp in genreCount)
