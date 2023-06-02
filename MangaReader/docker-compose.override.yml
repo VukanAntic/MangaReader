@@ -58,6 +58,7 @@ services:
 
 
   mangacatalog.grpc:
+    container_name: mangacatalog.grpc
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
