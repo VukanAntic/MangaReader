@@ -73,5 +73,25 @@ namespace MangaCatalog.GRPC.Services
 
             return response;
         }
+
+        public override async Task<GetAuthorNameByIdResponse> GetAuthorNameById(GetAuthorNameByIdRequest request, ServerCallContext context)
+        {
+            var author = await _repository.GetAuthorInfoById(request.AuthorId)
+                                ?? throw new RpcException(new Status(StatusCode.NotFound, $"Author with ID = {request.AuthorId} not found"));
+            var response = new GetAuthorNameByIdResponse();
+            response.AuthorName = author.Name;
+
+            return response;
+        }
+
+        public override async Task<GetGenreNameByIdResponse> GetGenreNameById(GetGenreNameByIdRequest request, ServerCallContext context)
+        {
+            var genre = await _repository.GetGenreById(request.GenreId)
+                                ?? throw new RpcException(new Status(StatusCode.NotFound, $"Genre with ID = {request.GenreId} not found"));
+            var response = new GetGenreNameByIdResponse();
+            response.GenreName = genre.Name;
+
+            return response;
+        }
     }
 }

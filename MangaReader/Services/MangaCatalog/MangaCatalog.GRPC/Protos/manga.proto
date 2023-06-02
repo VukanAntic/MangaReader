@@ -8,6 +8,8 @@ service MangaProtoService {
 	rpc GetMangaGenres (GetMangaGrenresRequest) returns (GetMangaGenresResponse);
 	rpc GetMangasByAuthorId (GetMangasByAuthorIdRequest) returns (GetMangasByAuthorIdResponse);
 	rpc GetMangasByGenreId (GetMangasByGenreIdRequest) returns (GetMangasByGenreIdResponse);
+	rpc GetAuthorNameById (GetAuthorNameByIdRequest) returns (GetAuthorNameByIdResponse);
+	rpc GetGenreNameById (GetGenreNameByIdRequest) returns (GetGenreNameByIdResponse);
 }
 
 message Manga{
@@ -64,4 +66,20 @@ message GetMangasByGenreIdRequest{
 
 message GetMangasByGenreIdResponse{
 	repeated Manga mangas = 1;
+}
+
+message GetAuthorNameByIdRequest{
+	string authorId = 1;
+}
+
+message GetAuthorNameByIdResponse{
+	string authorName = 1;
+}
+
+message GetGenreNameByIdRequest{
+	string genreId = 1;
+}
+
+message GetGenreNameByIdResponse{
+	string genreName = 1;
 }

@@ -6,7 +6,7 @@ namespace Recommendation.API.DTOs
     {
         public string FavouriteAuthorName { get; set; }
         public IEnumerable<MangaDTO> MangasByFavouriteAuthor { get; set; }
-        public string FavouriteGenre { get; set; }
+        public string FavouriteGenreName { get; set; }
         public IEnumerable<MangaDTO> MangasFromFavouriteGenre { get; set; }
         public IEnumerable<MangaDTO> ReadMangas { get; set; }
         public IEnumerable<MangaDTO> WishListMangas { get; set; }

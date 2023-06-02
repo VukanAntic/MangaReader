@@ -47,8 +47,9 @@ namespace Recommendation.API.Controllers
             IEnumerable<MangaDTO> readListMangas = _mapper.Map<IEnumerable<MangaDTO>>(readMangaResponse.Mangas);
             IEnumerable<MangaDTO> wishListMangas = _mapper.Map<IEnumerable<MangaDTO>>(wishMangaResponse.Mangas);
 
-            if (readListMangas.Count() == 0 || wishListMangas.Count() == 0)
+            if (readListMangas.Count() == 0 && wishListMangas.Count() == 0)
             {
+                // nothing to recommend from
                 return NotFound(null);
             }
 
@@ -62,19 +63,37 @@ namespace Recommendation.API.Controllers
                     genreIdList.Add(genre.GenreId.ToString());
                 }
             }
+            foreach (var mangaId in wishListIds)
+            {
+                var genres = await _mangaGrpcService.GetMangaGenres(mangaId);
+                foreach (var genre in genres.Genres)
+                {
+                    genreIdList.Add(genre.GenreId.ToString());
+                }
+            }
 
             var favouriteAuthorId = _context.GetFavouriteAuthorId(readListMangas, wishListMangas);
             var favouriteGenreId = _context.GetFavouriteGenreId(genreIdList);
 
-            // this is were we'll call _mangaGrpcService.GetMangasByGenreId and _mangaGrpcService.GetMangasByAuthorId to get the recommended mangas
             var favouriteAuthorMangasResponse = await _mangaGrpcService.GetMangasByAuthorId(favouriteAuthorId);
             var favouriteGenreMangasResponse = await _mangaGrpcService.GetMangasByGenreId(favouriteGenreId);
 
             IEnumerable<MangaDTO> favouriteAuthorMangas = _mapper.Map<IEnumerable<MangaDTO>>(favouriteAuthorMangasResponse.Mangas);
-            IEnumerable<MangaDTO> favouriteGenreMangas = _mapper.Map<IEnumerable<MangaDTO>>(favouriteGenreMangasResponse.Mangas);    
+            IEnumerable<MangaDTO> favouriteGenreMangas = _mapper.Map<IEnumerable<MangaDTO>>(favouriteGenreMangasResponse.Mangas); 
+            
+            var favouriteAuthorNameResponse = await _mangaGrpcService.GetAuthorNameById(favouriteAuthorId);
+            var favouriteGenreNameResponse = await _mangaGrpcService.GetGenreNameById(favouriteGenreId);
+
+            string favouriteAuthorName = favouriteAuthorNameResponse.AuthorName;
+            string favouriteGenreName = favouriteGenreNameResponse.GenreName;
 
             var recommendationPage = new RecommendationPageDTO();
-
+            recommendationPage.FavouriteAuthorName = favouriteAuthorName;
+            recommendationPage.MangasByFavouriteAuthor = favouriteAuthorMangas;
+            recommendationPage.FavouriteGenreName = favouriteGenreName;
+            recommendationPage.MangasFromFavouriteGenre = favouriteGenreMangas;
+            recommendationPage.ReadMangas = readListMangas;
+            recommendationPage.WishListMangas = wishListMangas;
 
             return Ok(recommendationPage);
         }
