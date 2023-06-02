@@ -45,8 +45,8 @@ namespace Recommendation.API.Controllers
             IEnumerable<MangaDTO> readListMangas = _mapper.Map<IEnumerable<MangaDTO>>(readMangaResponse.Mangas);
             IEnumerable<MangaDTO> wishListMangas = _mapper.Map<IEnumerable<MangaDTO>>(wishMangaResponse.Mangas);
 
-            var favouriteAuthorId = await _context.GetFavouriteAuthorId(readListMangas, wishListMangas);
-            var facouriteGenreId = await _context.GetFavouriteGenreId(readListMangas, wishListMangas);
+            var favouriteAuthorId = _context.GetFavouriteAuthorId(readListMangas, wishListMangas);
+            var facouriteGenreId = _context.GetFavouriteGenreId(readListMangas, wishListMangas);
 
             var recommendationPage = new RecommendationPageDTO();
 
