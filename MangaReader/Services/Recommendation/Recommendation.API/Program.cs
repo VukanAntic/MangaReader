@@ -19,9 +19,9 @@ builder.Services.AddScoped<MangaGrpcService>();
 builder.Services.AddAutoMapper(configuration => {
     configuration.CreateMap<MangaDTO, Manga>().ReverseMap();
 });
-builder.Services.AddAutoMapper(configuration => {
-    configuration.CreateMap<GenreDTO, GetMangaGenresResponse.Types.Genre>().ReverseMap();
-});
+//builder.Services.AddAutoMapper(configuration => {
+//    configuration.CreateMap<GenreDTO, GetMangaGenresResponse.Types.Genre>().ReverseMap();
+//});
 
 
 var app = builder.Build();

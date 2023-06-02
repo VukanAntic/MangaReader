@@ -35,7 +35,7 @@ namespace Recommendation.API.Contexts
 
             foreach(var kvp in authorCount)
             {
-                if(kvp.Value >  authorNumber)
+                if(kvp.Value > authorNumber)
                 {
                     favouriteAuthorId = kvp.Key;
                     authorNumber = kvp.Value;
@@ -45,9 +45,35 @@ namespace Recommendation.API.Contexts
             return favouriteAuthorId;
         }
 
-        public string? GetFavouriteGenreId(IEnumerable<MangaDTO> readList, IEnumerable<MangaDTO> wishList)
+        public string? GetFavouriteGenreId(IEnumerable<string> genreIdList)
         {
-            throw new NotImplementedException();
+            var genreCount = new Dictionary<string, int>();
+
+            foreach(var genre in genreIdList)
+            {
+                if (genreCount.ContainsKey(genre))
+                {
+                    genreCount[genre]++;
+                }
+                else
+                {
+                    genreCount[genre] = 1;
+                }
+            }
+
+            string favouriteGenre = null;
+            int genreNumber = 0;
+
+            foreach (var kvp in genreCount)
+            {
+                if (kvp.Value > genreNumber)
+                {
+                    favouriteGenre = kvp.Key;
+                    genreNumber = kvp.Value;
+                }
+            }
+
+            return favouriteGenre;
         }
     }
 }
