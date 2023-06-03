@@ -34,6 +34,13 @@ services:
       context: .
       dockerfile: Services/MangaCatalog/MangaCatalog.GRPC/Dockerfile
 
+  userinfo.grpc:
+    image: ${DOCKER_REGISTRY-}userinfogrpc
+    build:
+      context: .
+      dockerfile: Services/UserInfo/UserInfo.GRPC/Dockerfile
+
 volumes:
   mongo_data:
+
 
