@@ -2,6 +2,7 @@ using MangaCatalog.Common.DTOs.Genre;
 using MangaCatalog.Common.DTOs.Manga;
 using MangaCatalog.GRPC.Protos;
 using Recommendation.API.GrpcServices;
+using UserInfo.GRPC.Protos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,10 @@ builder.Services.AddSwaggerGen();
 // Add GRPC
 builder.Services.AddGrpcClient<MangaProtoService.MangaProtoServiceClient>(
     options => options.Address = new Uri(builder.Configuration["GrpcSettings:MangaUrl"]));
+// TODO: fix this url, prb bad
+builder.Services.AddGrpcClient<UserInfoProtoService.UserInfoProtoServiceClient>(
+    options => options.Address = new Uri(builder.Configuration["GrpcSettings:UserInfoUrl"]));
+builder.Services.AddScoped<UserInfoGrpcService>();
 builder.Services.AddScoped<MangaGrpcService>();
 builder.Services.AddAutoMapper(configuration => {
     configuration.CreateMap<MangaDTO, Manga>().ReverseMap();
