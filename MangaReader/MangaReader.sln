@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.33627.172
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MangaCatalog", "MangaCatalog", "{718C43DE-A8CB-4077-A055-0676DE961E85}"
 EndProject
@@ -32,7 +32,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recommendation.API", "Servi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaCatalog.GRPC", "Services\MangaCatalog\MangaCatalog.GRPC\MangaCatalog.GRPC.csproj", "{6B113E9E-871F-431D-906F-0A57EDA2F731}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInfo.GRPC", "Services\UserInfo\UserInfo.GRPC\UserInfo.GRPC.csproj", "{0BF6412B-FA2D-4699-9A02-342DF1406C79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserInfo.GRPC", "Services\UserInfo\UserInfo.GRPC\UserInfo.GRPC.csproj", "{0BF6412B-FA2D-4699-9A02-342DF1406C79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
