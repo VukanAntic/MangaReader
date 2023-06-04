@@ -9,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddGrpc();
 // FIX NEEDED!
+builder.Services.ConfigureReddisDataBase(builder.Configuration);
 builder.Services.Mapper(builder.Configuration);
+builder.Services.ConfigureJWT(builder.Configuration);
+builder.Services.ConfigureMiscellaneousServices();
 //builder.Services.AddUserInfoCommonServices(builder.Configuration);
 // TODO: check if we need mapper, because it is never used
 

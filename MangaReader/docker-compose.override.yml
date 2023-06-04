@@ -73,12 +73,11 @@ services:
     container_name: userinfo.grpc
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on: 
     - userinfo.api
     ports:
       - "8003:80"
-      - "443"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
