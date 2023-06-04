@@ -107,13 +107,15 @@ namespace Recommendation.API.Controllers
                 recommendationPage.MangasFromFavouriteGenre = favouriteGenreMangas;
                 recommendationPage.ReadMangas = readListMangas;
                 recommendationPage.WishListMangas = wishListMangas;
-
                 return Ok(recommendationPage);
+
             }
             catch (RpcException e)
             {
                 _logger.LogInformation("Error while getting recommendation for userId: {userId}", userId);
             }
+
+            return NotFound();
         }
     }
 }

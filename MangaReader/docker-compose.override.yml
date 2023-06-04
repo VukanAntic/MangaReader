@@ -56,8 +56,7 @@ services:
       - "8000:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-
-
+  
   mangacatalog.grpc:
     container_name: mangacatalog.grpc
     environment:
@@ -82,3 +81,20 @@ services:
       - "443"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  
+      
+  recommendation.api:
+    container_name: recommendation.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "GrpcSettings:MangaUrl=http://mangacatalog.grpc"
+      - "GrpcSettings:UserInfoUrl=http://userinfo.grpc"  
+    depends_on:
+      - mangacatalog.grpc
+      - userinfo.grpc
+    ports:
+      - "8004:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+  

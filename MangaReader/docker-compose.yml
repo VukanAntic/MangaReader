@@ -40,6 +40,13 @@ services:
       context: .
       dockerfile: Services/UserInfo/UserInfo.GRPC/Dockerfile
 
+  recommendation.api:
+    image: ${DOCKER_REGISTRY-}recommendationapi
+    build:
+      context: .
+      dockerfile: Services/Recommendation/Recommendation.API/Dockerfile
+
+
 volumes:
   mongo_data:
 
