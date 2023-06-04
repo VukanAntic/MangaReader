@@ -3,6 +3,8 @@ using MangaCatalog.Common.DTOs.Manga;
 using MangaCatalog.GRPC.Protos;
 using Recommendation.API.GrpcServices;
 using UserInfo.GRPC.Protos;
+using Recommendation.API.Extensions;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +30,8 @@ builder.Services.AddAutoMapper(configuration => {
 //    configuration.CreateMap<GenreDTO, GetMangaGenresResponse.Types.Genre>().ReverseMap();
 //});
 
+builder.Services.ConfigureJWT(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -38,6 +42,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

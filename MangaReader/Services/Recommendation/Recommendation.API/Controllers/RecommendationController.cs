@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Recommendation.API.Contexts;
 using Recommendation.API.DTOs;
 using Recommendation.API.GrpcServices;
+using System.Security.Claims;
 
 namespace Recommendation.API.Controllers
 {
@@ -35,10 +36,11 @@ namespace Recommendation.API.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(RecommendationPageDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(RecommendationPageDTO), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<RecommendationPageDTO>> GetRecommendationPage(string userId)
+        public async Task<ActionResult<RecommendationPageDTO>> GetRecommendationPage()
         {
             // Current plan: Use controler to create and fill a RecommendationPageDTO object with information using awailable methods from the _context object.
 
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             // Controler contacts UserInfo, gets ReadList and WishList and passes them to the _context methods to get information about the users 
             // favourite author and genre, which the controller then uses to contact Manga service to get mangas from that author/genre
 
