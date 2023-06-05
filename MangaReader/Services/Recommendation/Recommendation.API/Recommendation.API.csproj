@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\MangaCatalog\MangaCatalog.Common\MangaCatalog.Common.csproj" />
+    <ProjectReference Include="..\..\UserInfo\UserInfo.Common\UserInfo.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

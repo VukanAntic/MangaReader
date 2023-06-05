@@ -5,6 +5,7 @@ namespace Recommendation.API.Contexts
 {
     public class RecommendationContext : IRecommendationContext
     {
+        public RecommendationContext() { }
         public string GetFavouriteAuthorId(IEnumerable<MangaDTO> readList, IEnumerable<MangaDTO> wishList)
         {
             var authorCount = new Dictionary<string, int>();

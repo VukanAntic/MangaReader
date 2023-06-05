@@ -25,12 +25,14 @@ namespace UserInfo.GRPC.Services
 
         public async override Task<GetUserInfoResponse> GetUserInfo(GetUserInfoRequest request, ServerCallContext context)
         {
+            _logger.LogInformation("Pre request.Id");
             var userInfo = await _repository.GetUserInfo(request.Id)
                 ?? throw new RpcException(new Status(StatusCode.NotFound, $"UserInfo with Id = {request.Id} is not found"));
 
             _logger.LogInformation("UserInfo with ID: {mangaId} is retrieved", request.Id);
 
             var response = new GetUserInfoResponse();
+            response.ReadingJournal = new ReadingJournal();
             response.ReadingJournal.LastReadMangaID = userInfo.ReadingJournal.LastReadMangaID;
             response.ReadingJournal.AllReadMangaIDs.AddRange(userInfo.ReadingJournal.AllReadMangaIDs);
             response.ReadingJournal.WishList.AddRange(userInfo.ReadingJournal.WishList);

@@ -4,6 +4,7 @@ using MangaCatalog.Common.DTOs.Manga;
 using MangaCatalog.GRPC.Protos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Recommendation.API.Contexts;
 using Recommendation.API.DTOs;
 using Recommendation.API.GrpcServices;
