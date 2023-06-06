@@ -45,11 +45,7 @@ message GetMangaGrenresRequest{
 }
 
 message GetMangaGenresResponse{
-	message Genre {
-		string genreId = 1;
-		string genreName = 2;
-	}
-	repeated Genre genres = 1;
+	repeated string genres = 1;
 }
 
 message GetMangasByAuthorIdRequest{

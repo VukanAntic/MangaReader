@@ -73,19 +73,13 @@ namespace Recommendation.API.Controllers
 
                 foreach (var mangaId in allReadMangaIDs)
                 {
-                    var genres = await _mangaGrpcService.GetMangaGenres(mangaId);
-                    foreach (var genre in genres.Genres)
-                    {
-                        genreIdList.Add(genre.GenreId.ToString());
-                    }
+                    var mangaGenresResponse = await _mangaGrpcService.GetMangaGenres(mangaId);
+                    genreIdList.AddRange(mangaGenresResponse.Genres);
                 }
                 foreach (var mangaId in wishList)
                 {
-                    var genres = await _mangaGrpcService.GetMangaGenres(mangaId);
-                    foreach (var genre in genres.Genres)
-                    {
-                        genreIdList.Add(genre.GenreId.ToString());
-                    }
+                    var mangaGenresResponse = await _mangaGrpcService.GetMangaGenres(mangaId);
+                    genreIdList.AddRange(mangaGenresResponse.Genres);
                 }
 
                 var favouriteAuthorId = _context.GetFavouriteAuthorId(readListMangas, wishListMangas);

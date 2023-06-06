@@ -47,9 +47,9 @@ namespace MangaCatalog.GRPC.Services
         {
             var genres = await _repository.GetAllGenresOfMangaById(request.MangaId)
                                 ?? throw new RpcException(new Status(StatusCode.NotFound, $"Genres for manga with ID = {request.MangaId} not found"));
-
+            var genreIds = genres.Select(g => g.Id);
             var response = new GetMangaGenresResponse();
-            response.Genres.AddRange(_mapper.Map<IEnumerable<GetMangaGenresResponse.Types.Genre>>(genres));
+            response.Genres.AddRange(genreIds);
 
             return response;
         }
