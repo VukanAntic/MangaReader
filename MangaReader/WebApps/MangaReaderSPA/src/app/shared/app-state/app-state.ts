@@ -2,6 +2,8 @@ export interface IAppState {
   accessToken?: string;
   refreshToken?: string;
   username?: string;
+
+  clone(): IAppState;
 }
 
 export class AppState implements IAppState {
@@ -11,9 +13,9 @@ export class AppState implements IAppState {
 
   public constructor();
   public constructor(
-    accessToken: string,
-    refreshToken: string,
-    username: string
+    accessToken?: string,
+    refreshToken?: string,
+    username?: string
   );
 
   public constructor(...args: any[]) {
@@ -24,5 +26,11 @@ export class AppState implements IAppState {
       this.refreshToken = args[1];
       this.username = args[2];
     }
+  }
+
+  public clone(): IAppState {
+    const newState = new AppState();
+    Object.assign(newState, this);
+    return newState;
   }
 }
