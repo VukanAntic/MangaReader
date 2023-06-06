@@ -1,5 +1,5 @@
 ﻿using System;
-namespace UserInfo.API.DTOs
+namespace UserInfo.Common.DTOs
 {
 	public class UpdateUserInfoDTO // moze da posluzi za sva 3 razlicita zahteva za update
 	{

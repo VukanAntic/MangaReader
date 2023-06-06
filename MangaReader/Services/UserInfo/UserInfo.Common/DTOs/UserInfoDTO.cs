@@ -1,6 +1,6 @@
-﻿using UserInfo.API.Entities;
+﻿using UserInfo.Common.Entities;
 
-namespace UserInfo.API.DTOs
+namespace UserInfo.Common.DTOs
 {
     public class UserInfoDTO
     {

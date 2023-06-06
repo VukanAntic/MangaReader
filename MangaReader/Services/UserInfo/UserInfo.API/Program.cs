@@ -1,5 +1,4 @@
-using UserInfo.API.Extentions;
-using UserInfo.API.Repository;
+using UserInfo.Common.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 

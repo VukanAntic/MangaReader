@@ -4,7 +4,8 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "mangacatalog.api": "StartDebugging"
+        "mangacatalog.api": "StartDebugging",
+        "mangacatalog.grpc": "StartDebugging"
       }
     }
   }

@@ -6,17 +6,17 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Services/UserInfo/UserInfo.API/UserInfo.API.csproj", "Services/UserInfo/UserInfo.API/"]
+COPY ["Services/UserInfo/UserInfo.Common/UserInfo.Common.csproj", "Services/UserInfo/UserInfo.Common/"]
 COPY ["Common/EventBus.Messages/EventBus.Messages.csproj", "Common/EventBus.Messages/"]
-RUN dotnet restore "Services/UserInfo/UserInfo.API/UserInfo.API.csproj"
+RUN dotnet restore "Services/UserInfo/UserInfo.Common/UserInfo.Common.csproj"
 COPY . .
-WORKDIR "/src/Services/UserInfo/UserInfo.API"
-RUN dotnet build "UserInfo.API.csproj" -c Release -o /app/build
+WORKDIR "/src/Services/UserInfo/UserInfo.Common"
+RUN dotnet build "UserInfo.Common.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "UserInfo.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "UserInfo.Common.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "UserInfo.API.dll"]
+ENTRYPOINT ["dotnet", "UserInfo.Common.dll"]

@@ -46,6 +46,7 @@ services:
     ports:
       - "8001:80"
 
+    # need to add depends on maybe? (manga.common)
   mangacatalog.api:
     container_name: mangacatalog.api
     environment:
@@ -55,4 +56,46 @@ services:
       - "8000:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+  
+  mangacatalog.grpc:
+    container_name: mangacatalog.grpc
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    ports:
+      - "8002:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
 
+# When we add dockerization for the Recommendation.API we need to add the following line into the environment section : "GrpcSettings:MangaUrl=http://mangacatalog.grpc"
+
+  userinfo.grpc:
+    container_name: userinfo.grpc
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "CacheSettings:ConnectionString=userInfodb:6379"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    depends_on: 
+      - userinfo.api
+    ports:
+      - "8003:80"
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  
+      
+  recommendation.api:
+    container_name: recommendation.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+      - "GrpcSettings:MangaUrl=http://mangacatalog.grpc"
+      - "GrpcSettings:UserInfoUrl=http://userinfo.grpc"  
+    depends_on:
+      - mangacatalog.grpc
+      - userinfo.grpc
+    ports:
+      - "8004:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+  
