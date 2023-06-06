@@ -1,5 +1,5 @@
 using UserInfo.GRPC.Services;
-using UserInfo.API.Extentions;
+using UserInfo.Common.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 

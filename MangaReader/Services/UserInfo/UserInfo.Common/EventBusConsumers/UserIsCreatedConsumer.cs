@@ -4,10 +4,10 @@ using EventBus.Messages.Events;
 using MassTransit;
 using MassTransit.Mediator;
 using Microsoft.Extensions.Logging;
-using UserInfo.API.DTOs;
-using UserInfo.API.Repository;
+using UserInfo.Common.DTOs;
+using UserInfo.Common.Repository;
 
-namespace UserInfo.API.EventBusConsumers
+namespace UserInfo.Common.EventBusConsumers
 {
 	public class UserIsCreatedConsumer : IConsumer<UserIsCreatedEvent>
 	{

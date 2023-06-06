@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UserInfo.API.Repository;
+using UserInfo.Common.Repository;
 using UserInfo.GRPC.Protos;
 
 namespace UserInfo.GRPC.Services

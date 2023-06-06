@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using UserInfo.API.Entities;
-using UserInfo.API.Repository;
-using UserInfo.API.DTOs;
+using UserInfo.Common.Entities;
+using UserInfo.Common.Repository;
+using UserInfo.Common.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Components.Forms;
 
-namespace UserInfo.API.Controllers
+namespace UserInfo.Common.Controllers
 {
     [Authorize]
     [ApiController]

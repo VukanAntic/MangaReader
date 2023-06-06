@@ -3,7 +3,7 @@ using MangaCatalog.Common.DTOs.Manga;
 using MangaCatalog.GRPC.Protos;
 using Recommendation.API.GrpcServices;
 using UserInfo.GRPC.Protos;
-using UserInfo.API.Extentions;
+using UserInfo.Common.Extentions;
 using Recommendation.API.Contexts;
 
 

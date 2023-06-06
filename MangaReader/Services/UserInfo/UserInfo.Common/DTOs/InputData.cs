@@ -1,4 +1,4 @@
-﻿namespace UserInfo.API.DTOs
+﻿namespace UserInfo.Common.DTOs
 {
     public class InputData
     {

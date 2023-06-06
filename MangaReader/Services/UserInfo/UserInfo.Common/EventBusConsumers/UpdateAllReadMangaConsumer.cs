@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using MassTransit;
 using EventBus.Messages.Events;
-using UserInfo.API.Repository;
+using UserInfo.Common.Repository;
 using System.Security.Claims;
-using UserInfo.API.DTOs;
+using UserInfo.Common.DTOs;
 using Microsoft.Extensions.Logging;
 
-namespace UserInfo.API.EventBusConsumers
+namespace UserInfo.Common.EventBusConsumers
 {
     public class UpdateAllReadMangaConsumer : IConsumer<UpdateAllReadMangaEvent>
     {

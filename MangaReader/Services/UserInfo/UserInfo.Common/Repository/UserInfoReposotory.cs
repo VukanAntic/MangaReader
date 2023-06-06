@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
-using UserInfo.API.DTOs;
-using UserInfo.API.Entities;
+using UserInfo.Common.DTOs;
+using UserInfo.Common.Entities;
 
-namespace UserInfo.API.Repository
+namespace UserInfo.Common.Repository
 {
     public class UserInfoReposotory : IUserInformationRepository
     {

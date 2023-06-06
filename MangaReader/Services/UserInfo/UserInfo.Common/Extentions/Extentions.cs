@@ -1,18 +1,18 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using UserInfo.API.Repository;
+using UserInfo.Common.Repository;
 using AutoMapper;
-using UserInfo.API.Entities;
-using UserInfo.API.DTOs;
+using UserInfo.Common.Entities;
+using UserInfo.Common.DTOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using MassTransit;
 using EventBus.Messages.Events;
-using UserInfo.API.EventBusConsumers;
+using UserInfo.Common.EventBusConsumers;
 using EventBus.Messages.Constants;
 
-namespace UserInfo.API.Extentions
+namespace UserInfo.Common.Extentions
 {
     public static class Extentions
     {

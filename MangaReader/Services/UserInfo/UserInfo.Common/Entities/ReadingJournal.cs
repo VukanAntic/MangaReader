@@ -1,4 +1,4 @@
-﻿namespace UserInfo.API.Entities
+﻿namespace UserInfo.Common.Entities
 {
     public class ReadingJournal
     {

@@ -52,7 +52,7 @@ namespace Recommendation.API.Controllers
 
                 // temp
                 string lastReadMangaID = userInfo.ReadingJournal.LastReadMangaID;
-                IEnumerable<string> allReadMangaIDs = userInfo.ReadingJournal.AllReadMangaIDs; // both of these lists will come from GRPC communication with UserInfo.API
+                IEnumerable<string> allReadMangaIDs = userInfo.ReadingJournal.AllReadMangaIDs; // both of these lists will come from GRPC communication with UserInfo.Common
                 IEnumerable<string> wishList = userInfo.ReadingJournal.WishList;
 
                 var readMangaResponse = await _mangaGrpcService.GetMangas(allReadMangaIDs);
