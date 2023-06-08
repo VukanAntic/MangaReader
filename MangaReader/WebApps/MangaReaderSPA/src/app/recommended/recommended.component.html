@@ -1,0 +1,15 @@
+<body>
+  <div id="background">
+    <div class="ui segments" style="padding-bottom: 1%;">
+      <div
+        class="ui divided items"
+        *ngIf="(recommendationPage | async) != null"
+      >
+        <app-manga-image
+          *ngFor="let oneManga of readMangas"
+          [manga]="oneManga"
+        ></app-manga-image>
+      </div>
+    </div>
+  </div>
+</body>
