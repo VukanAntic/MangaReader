@@ -17,14 +17,8 @@ export class LoginFormComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationFacadeService) {
     this.loginForm = new FormGroup({
-      username: new FormControl("", [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
-      password: new FormControl("", [
-        Validators.required,
-        Validators.minLength(8),
-      ]),
+      username: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      password: new FormControl("", [Validators.required, Validators.minLength(8)]),
     });
   }
 
@@ -37,11 +31,9 @@ export class LoginFormComponent implements OnInit {
     }
 
     const data: ILoginFormData = this.loginForm.value as ILoginFormData;
-    this.authenticationService
-      .login(data.username, data.password)
-      .subscribe((success: boolean) => {
-        window.alert(`Login ${success ? "is" : "is not"} successful!`);
-        this.loginForm.reset();
-      });
+    this.authenticationService.login(data.username, data.password).subscribe((success: boolean) => {
+      window.alert(`Login ${success ? "is" : "is not"} successful!`);
+      this.loginForm.reset();
+    });
   }
 }
