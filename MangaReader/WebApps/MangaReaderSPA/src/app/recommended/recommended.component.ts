@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { RecommendationPage } from './domain/models/recommendation-page.model'
 import { Observable, Subscription } from 'rxjs'
-import { RecommendationService } from './domain/infrastructure/recommendation.service'
 import { Manga } from './domain/models/manga.model'
+import { RecommendationFacadeService } from './domain/application-services/recommendation-facade.service'
 
 @Component({
   selector: 'app-recommended',
@@ -20,17 +20,16 @@ export class RecommendedComponent implements OnInit {
   public wishListMangas!: [Manga] | null
   public readMangas!: [Manga] | null
 
-  constructor(private recommendationService: RecommendationService) {}
+  public count = 0
+
+  constructor(private recommendationService: RecommendationFacadeService) {}
 
   ngOnInit(): void {
+    this.count += 1
     this.recommendationPage = this.recommendationService.getRecommenationPage()
-    this.recommendationPageSub = this.recommendationPage.subscribe((result) => {
-      this.favouriteAuthorName = result.favouriteAuthorName
-      this.mangasByFavouriteAuthor = result.mangasByFavouriteAuthor
-      this.favouriteGenreName = result.favouriteGenreName
-      this.mangasFromFavouriteGenre = result.mangasFromFavouriteGenre
-      this.readMangas = result.ReadMangas
-      this.wishListMangas = result.WishListMangas
+    this.recommendationPage?.subscribe((res) => {
+      console.log(res)
+      console.log(res.readMangas)
     })
   }
 }

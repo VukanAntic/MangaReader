@@ -1,15 +1,23 @@
 <body>
   <div id="background">
     <div class="ui segments" style="padding-bottom: 1%;">
+      <h1>Pre recommendationPage-a zahtev</h1>
       <div
         class="ui divided items"
         *ngIf="(recommendationPage | async) != null"
       >
+        <h1>Uspeo zahtev broj {{ count }}</h1>
+        <h1>
+          Favourite author
+          {{ (recommendationPage | async)?.favouriteAuthorName }}
+        </h1>
         <app-manga-image
-          *ngFor="let oneManga of readMangas"
+          *ngFor="let oneManga of (recommendationPage | async)?.readMangas"
           [manga]="oneManga"
         ></app-manga-image>
       </div>
     </div>
   </div>
 </body>
+
+<!-- [manga]="oneManga" -->

@@ -2,9 +2,9 @@ import { Manga } from './manga.model'
 
 export interface RecommendationPage {
   favouriteAuthorName: string
-  mangasByFavouriteAuthor: [Manga]
+  mangasByFavouriteAuthor: Manga[]
   favouriteGenreName: string
-  mangasFromFavouriteGenre: [Manga]
-  ReadMangas: [Manga]
-  WishListMangas: [Manga]
+  mangasFromFavouriteGenre: Manga[]
+  readMangas: Manga[]
+  wishListMangas: Manga[]
 }
