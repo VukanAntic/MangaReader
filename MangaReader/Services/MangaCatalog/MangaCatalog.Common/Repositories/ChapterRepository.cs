@@ -2,6 +2,7 @@
 using Dapper;
 using MangaCatalog.Common.Data;
 using MangaCatalog.Common.DTOs.Chapter;
+using MangaCatalog.Common.DTOs.Page;
 using MangaCatalog.Common.Entities;
 using MangaCatalog.Common.Repositories.Interfaces;
 
@@ -32,12 +33,12 @@ namespace MangaCatalog.Common.Repositories
             return _mapper.Map<IEnumerable<ChapterDTO>>(chapters);
         }
 
-        public async Task<IEnumerable<Page>> GetPagesForChapterId(string chapterId)
+        public async Task<IEnumerable<PageDTO>> GetPagesForChapterId(string chapterId)
         {
             using var connection = _context.GetConnection();
 
             Console.WriteLine(chapterId);
-            var chapters = await connection.QueryAsync<Page>(
+            var chapters = await connection.QueryAsync<PageDTO>(
                 "SELECT chapter_id as ChapterId, page_number as pageNumber, image_link as imageLink " +
                 "FROM page " +
                 "WHERE chapter_id = @ChapterId " +
