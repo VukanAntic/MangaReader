@@ -27,7 +27,7 @@ export class MangaProductService {
     );
   }
 
-  public getMangaChapters(chapterId : string) : Observable<[Chapter]> {
+  public getMangaChapters(mangaId : string) : Observable<[Chapter]> {
     return this.appStateService.getAppState().pipe(
       take(1),
       switchMap((appState: IAppState) => {
@@ -35,7 +35,7 @@ export class MangaProductService {
         const headers: HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${accessToken}`);
 
         return this.httpClient.get<[Chapter]>(
-          "http://localhost:8000/api/Chapter/GetAllChaptersForMangaId/" + chapterId,  { headers }
+          "http://localhost:8000/api/Chapter/GetAllChaptersForMangaId/" + mangaId,  { headers }
         )
       })
     );
