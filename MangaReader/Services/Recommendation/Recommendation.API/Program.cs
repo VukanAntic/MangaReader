@@ -33,6 +33,9 @@ builder.Services.AddScoped<IRecommendationContext, RecommendationContext>();
 //});
 
 builder.Services.ConfigureJWT(builder.Configuration);
+builder.Services.AddCors(options => {
+    options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+});
 
 
 var app = builder.Build();
@@ -43,6 +46,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("CorsPolicy");
+app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
