@@ -1,16 +1,16 @@
-import { Injectable } from "@angular/core";
-import { catchError, map, Observable, of, switchMap } from "rxjs";
-import { AuthenticationService } from "../infrastructure/authentication.service";
-import { ILoginRequest } from "../models/login-request";
-import { ILoginResponse } from "../models/login-response";
-import { AppStateService } from "src/app/shared/app-state/app-state.service";
-import { JwtService } from "src/app/shared/jwt/jwt.service";
-import { JwtPayloadKeys } from "src/app/shared/jwt/jwt-payload-keys";
-import { UserFasadeService } from "./user-fasade.service";
-import { IUserDetails } from "../models/user-details";
+import { Injectable } from '@angular/core';
+import { catchError, map, Observable, of, switchMap } from 'rxjs';
+import { AuthenticationService } from '../infrastructure/authentication.service';
+import { ILoginRequest } from '../models/login-request';
+import { ILoginResponse } from '../models/login-response';
+import { AppStateService } from 'src/app/shared/app-state/app-state.service';
+import { JwtService } from 'src/app/shared/jwt/jwt.service';
+import { JwtPayloadKeys } from 'src/app/shared/jwt/jwt-payload-keys';
+import { UserFasadeService } from './user-fasade.service';
+import { IUserDetails } from '../models/user-details';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthenticationFacadeService {
   constructor(
