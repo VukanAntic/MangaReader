@@ -106,6 +106,10 @@ namespace IdentityServer.Extentions
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IIdentityServerContext, IdentityServerContext>();
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+            
+            services.AddCors(options => {
+                options.AddPolicy("CorsPolicy", builder=>builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
 
             return services;
         }
