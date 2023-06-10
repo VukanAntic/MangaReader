@@ -1,13 +1,17 @@
-<div class="ui segment title" style="font-size: 13pt;">
-  <p>Test</p>
-</div>
-
 <div class="ui segment manga_image_wrapper">
-  <img class="arrow left_arrow" src="./../../../../assets/left-arrow.png" />
+  <img
+    class="arrow left_arrow"
+    src="./../../../../assets/left-arrow.png"
+    (click)="previousPage()"
+  />
   <app-manga-image
     class="ui item"
-    *ngFor="let oneManga of mangaList"
+    *ngFor="let oneManga of displayMangaList"
     [manga]="oneManga"
   ></app-manga-image>
-  <img class="arrow right_arrow" src="./../../../../assets/right-arrow.png" />
+  <img
+    class="arrow right_arrow"
+    src="./../../../../assets/right-arrow.png"
+    (click)="nextPage()"
+  />
 </div>
