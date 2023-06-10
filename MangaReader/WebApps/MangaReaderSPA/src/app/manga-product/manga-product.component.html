@@ -1,0 +1,13 @@
+<div class="ui divided items" *ngIf="(mangaData) != undefined && (mangaChapters) != undefined">
+    {{mangaData.title}}
+    {{mangaData.description}}
+    <img [src]="mangaData.coverArt" alt="Cover" width="500" height="600">
+    <h3>Chapters:</h3>
+    <ul>    
+        <li *ngFor='let mangaChapter of mangaChapters; let i=index;'>    
+          {{mangaChapter.chapterNumber}} : {{mangaChapter.title}}      
+    </ul>
+</div>
+<div class="ui divided items" *ngIf="(mangaData) == undefined">
+    404
+</div>
