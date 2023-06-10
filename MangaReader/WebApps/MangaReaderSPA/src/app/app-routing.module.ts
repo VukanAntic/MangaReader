@@ -7,6 +7,10 @@ const routes: Routes = [
   { path: "identity", loadChildren: () => import("./identity/identity.module").then((m) => m.IdentityModule) },
   { path: "manga/:mangaId", component: MangaProductComponent },
   { path: "chapter/:chapterId", component: ChapterComponent },
+  {
+    path: "recommended",
+    loadChildren: () => import("./recommended/recommended.module").then((m) => m.RecommendedModule),
+  },
 ];
 
 @NgModule({
