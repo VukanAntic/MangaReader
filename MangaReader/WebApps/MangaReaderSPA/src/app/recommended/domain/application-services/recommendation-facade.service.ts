@@ -18,7 +18,7 @@ export class RecommendationFacadeService {
     this.appStateService.getAppState().subscribe((appState) => {
       this.recommended = this.recommendationService.getRecommenationPage(
         appState.accessToken,
-      )
+      ) //.pipe(map()=> {})
     })
     return this.recommended
   }

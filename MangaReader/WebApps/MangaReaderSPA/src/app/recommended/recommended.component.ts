@@ -13,13 +13,6 @@ export class RecommendedComponent implements OnInit {
   public recommendationPage?: Observable<RecommendationPage> | null
   public recommendationPageSub!: Subscription | null
 
-  public favouriteAuthorName!: String | null
-  public mangasByFavouriteAuthor!: [Manga] | null
-  public favouriteGenreName!: string | null
-  public mangasFromFavouriteGenre!: [Manga] | null
-  public wishListMangas!: [Manga] | null
-  public readMangas!: [Manga] | null
-
   public count = 0
 
   constructor(private recommendationService: RecommendationFacadeService) {}
@@ -27,9 +20,9 @@ export class RecommendedComponent implements OnInit {
   ngOnInit(): void {
     this.count += 1
     this.recommendationPage = this.recommendationService.getRecommenationPage()
-    this.recommendationPage?.subscribe((res) => {
-      console.log(res)
-      console.log(res.readMangas)
-    })
+    // this.recommendationPage?.subscribe((res) => {
+    //   console.log(res)
+    //   console.log(res.readMangas)
+    // })
   }
 }
