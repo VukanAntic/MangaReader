@@ -3,3 +3,5 @@
     <li *ngFor='let pageData of pagesData; let i=index;'>    
         <img [src]="pageData.imageLink" alt="Cover" width="1200" height="1200">   
 </ul>
+<a routerLink="/chapter/{{adjacentChapterInfo.prevId}}"  routerLinkActive="active">Previous chapter</a>
+<a routerLink="/chapter/{{adjacentChapterInfo.nextId}}"  routerLinkActive="active">Next chapter</a>

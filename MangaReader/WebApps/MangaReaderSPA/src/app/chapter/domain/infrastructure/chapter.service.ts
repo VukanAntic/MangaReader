@@ -1,10 +1,9 @@
+import { adjacentChapter } from './../../../manga-product/domain/models/adjacentChapter.model';
+import { Chapter } from './../../../manga-product/domain/models/chapter.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, switchMap, take } from 'rxjs';
-import { Chapter } from 'src/app/manga-product/domain/models/chapter.model';
 import { Page } from 'src/app/manga-product/domain/models/page.model';
-import { IAppState } from 'src/app/shared/app-state/app-state';
-import { AppStateService } from 'src/app/shared/app-state/app-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,4 +26,11 @@ export class ChapterService {
       "http://localhost:8000/api/Chapter/GetChapterById/" + chapterId
     ); 
   }
+
+  public getAdjacentChapters(chapterId : string): Observable<adjacentChapter> {
+    return this.httpClient.get<adjacentChapter>(
+      "http://localhost:8000/api/Chapter/GetAdjacentChapters/" + chapterId
+    );
+  }
+
 }
