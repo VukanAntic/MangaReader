@@ -1,4 +1,6 @@
 ﻿using MangaCatalog.Common.DTOs.Chapter;
+using MangaCatalog.Common.DTOs.Page;
+using MangaCatalog.Common.Entities;
 using MangaCatalog.Common.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,8 +33,8 @@ namespace MangaCatalog.API.Controllers
 
         [Route("[action]/{chapterId}")]
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<ChapterDTO>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<ChapterDTO>>> GetPagesForChapterId(string chapterId)
+        [ProducesResponseType(typeof(IEnumerable<PageDTO>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<PageDTO>>> GetPagesForChapterId(string chapterId)
         {
             var pages = await _repository.GetPagesForChapterId(chapterId);
             return Ok(pages);

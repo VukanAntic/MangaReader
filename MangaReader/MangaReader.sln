@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.33627.172
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MangaCatalog", "MangaCatalog", "{718C43DE-A8CB-4077-A055-0676DE961E85}"
 EndProject
@@ -25,6 +25,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Messages", "Common\EventBus.Messages\EventBus.Messages.csproj", "{62A680A8-5A2B-47F2-B754-6CB0374D0158}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserInfo.Common", "Services\UserInfo\UserInfo.Common\UserInfo.Common.csproj", "{0FD3E672-AC68-4FC8-920C-38191B781C27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Recommendation", "Recommendation", "{0DDBA67E-F5F5-49DD-AAD4-F9B09F8DE454}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recommendation.API", "Services\Recommendation\Recommendation.API\Recommendation.API.csproj", "{60DE78D3-6BB4-4819-9001-78B499E3DC96}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaCatalog.GRPC", "Services\MangaCatalog\MangaCatalog.GRPC\MangaCatalog.GRPC.csproj", "{6B113E9E-871F-431D-906F-0A57EDA2F731}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserInfo.GRPC", "Services\UserInfo\UserInfo.GRPC\UserInfo.GRPC.csproj", "{0BF6412B-FA2D-4699-9A02-342DF1406C79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +68,18 @@ Global
 		{0FD3E672-AC68-4FC8-920C-38191B781C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FD3E672-AC68-4FC8-920C-38191B781C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FD3E672-AC68-4FC8-920C-38191B781C27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60DE78D3-6BB4-4819-9001-78B499E3DC96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60DE78D3-6BB4-4819-9001-78B499E3DC96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60DE78D3-6BB4-4819-9001-78B499E3DC96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60DE78D3-6BB4-4819-9001-78B499E3DC96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B113E9E-871F-431D-906F-0A57EDA2F731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B113E9E-871F-431D-906F-0A57EDA2F731}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B113E9E-871F-431D-906F-0A57EDA2F731}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B113E9E-871F-431D-906F-0A57EDA2F731}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BF6412B-FA2D-4699-9A02-342DF1406C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BF6412B-FA2D-4699-9A02-342DF1406C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BF6412B-FA2D-4699-9A02-342DF1406C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BF6412B-FA2D-4699-9A02-342DF1406C79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +93,10 @@ Global
 		{C0E36FAA-698B-462F-AEFF-09429D652B97} = {2ACB767C-7A37-476C-9EB6-6F1D1B6F105A}
 		{62A680A8-5A2B-47F2-B754-6CB0374D0158} = {3B684297-9840-4272-BDA1-5D7E5AC1421A}
 		{0FD3E672-AC68-4FC8-920C-38191B781C27} = {C0E36FAA-698B-462F-AEFF-09429D652B97}
+		{0DDBA67E-F5F5-49DD-AAD4-F9B09F8DE454} = {2ACB767C-7A37-476C-9EB6-6F1D1B6F105A}
+		{60DE78D3-6BB4-4819-9001-78B499E3DC96} = {0DDBA67E-F5F5-49DD-AAD4-F9B09F8DE454}
+		{6B113E9E-871F-431D-906F-0A57EDA2F731} = {718C43DE-A8CB-4077-A055-0676DE961E85}
+		{0BF6412B-FA2D-4699-9A02-342DF1406C79} = {C0E36FAA-698B-462F-AEFF-09429D652B97}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {054325B2-841E-4B55-9C9B-225E4BBE48D0}

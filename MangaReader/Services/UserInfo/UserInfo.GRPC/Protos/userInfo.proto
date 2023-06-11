@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "UserInfo.GRPC.Protos";
+
+
+service UserInfoProtoService {
+	rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse);
+}
+
+message ReadingJournal {
+	string lastReadMangaID = 1;
+	repeated string allReadMangaIDs = 2;
+	repeated string wishList = 3;
+}
+
+message GetUserInfoRequest {
+	string id = 1;
+}
+
+message GetUserInfoResponse {
+	ReadingJournal readingJournal = 1;
+}

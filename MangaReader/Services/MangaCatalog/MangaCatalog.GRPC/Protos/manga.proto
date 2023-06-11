@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+option csharp_namespace = "MangaCatalog.GRPC.Protos";
+
+service MangaProtoService {
+	rpc GetManga (GetMangaRequest) returns (GetMangaResponse);
+	rpc GetMangas (GetMangasRequest) returns (GetMangasResponse);
+	rpc GetMangaGenres (GetMangaGrenresRequest) returns (GetMangaGenresResponse);
+	rpc GetMangasByAuthorId (GetMangasByAuthorIdRequest) returns (GetMangasByAuthorIdResponse);
+	rpc GetMangasByGenreId (GetMangasByGenreIdRequest) returns (GetMangasByGenreIdResponse);
+	rpc GetAuthorNameById (GetAuthorNameByIdRequest) returns (GetAuthorNameByIdResponse);
+	rpc GetGenreNameById (GetGenreNameByIdRequest) returns (GetGenreNameByIdResponse);
+}
+
+message Manga{
+	string id = 1;
+	string title = 2;
+	string description = 3;
+	string status = 4;
+    string coverArt = 5;
+    bool contentRating = 6;
+    string authorId = 7;
+    int32 numberOfRatings = 8;
+    float sumOfRatings = 9;
+}
+
+message GetMangaRequest{
+	string mangaId = 1;
+}
+
+message GetMangaResponse{
+	Manga manga = 1;
+}
+
+message GetMangasRequest{
+	repeated string mangaIds = 1;
+}
+
+message GetMangasResponse{
+	repeated Manga mangas = 1;
+}
+
+message GetMangaGrenresRequest{
+	string mangaId = 1;
+}
+
+message GetMangaGenresResponse{
+	repeated string genres = 1;
+}
+
+message GetMangasByAuthorIdRequest{
+	string authorId = 1;
+}
+
+message GetMangasByAuthorIdResponse{
+	repeated Manga mangas = 1;
+}
+
+message GetMangasByGenreIdRequest{
+	string genreId = 1;
+}
+
+message GetMangasByGenreIdResponse{
+	repeated Manga mangas = 1;
+}
+
+message GetAuthorNameByIdRequest{
+	string authorId = 1;
+}
+
+message GetAuthorNameByIdResponse{
+	string authorName = 1;
+}
+
+message GetGenreNameByIdRequest{
+	string genreId = 1;
+}
+
+message GetGenreNameByIdResponse{
+	string genreName = 1;
+}

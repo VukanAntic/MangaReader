@@ -1,5 +1,4 @@
-using UserInfo.API.Extentions;
-using UserInfo.API.Repository;
+using UserInfo.Common.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +23,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("CorsPolicy");
+app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

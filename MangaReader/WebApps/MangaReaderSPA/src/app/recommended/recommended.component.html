@@ -1,0 +1,44 @@
+<body>
+  <div id="background">
+    <div>
+      <!-- <h1>Pre recommendationPage-a zahtev</h1> -->
+      <div *ngIf="(recommendationPage | async) != null" class="ui segments">
+        <div class="ui segment title" style="font-size: 13pt;">
+          <p>
+            More from
+            {{ (recommendationPage | async)?.favouriteAuthorName }}
+          </p>
+        </div>
+        <app-manga-list
+          [mangaList]="(recommendationPage | async)?.mangasByFavouriteAuthor"
+        ></app-manga-list>
+        <div class="ui segment title" style="font-size: 13pt;">
+          <p>
+            More
+            {{ (recommendationPage | async)?.favouriteGenreName }}
+            mangas
+          </p>
+        </div>
+        <app-manga-list
+          [mangaList]="(recommendationPage | async)?.mangasFromFavouriteGenre"
+        ></app-manga-list>
+        <div class="ui segment title" style="font-size: 13pt;">
+          <p>
+            Read more
+          </p>
+        </div>
+        <app-manga-list
+          [mangaList]="(recommendationPage | async)?.readMangas"
+        ></app-manga-list>
+        <div class="ui segment title" style="font-size: 13pt;">
+          <p>
+            Something from your wish list
+          </p>
+        </div>
+        <app-manga-list
+          [mangaList]="(recommendationPage | async)?.wishListMangas"
+        ></app-manga-list>
+      </div>
+    </div>
+  </div>
+</body>

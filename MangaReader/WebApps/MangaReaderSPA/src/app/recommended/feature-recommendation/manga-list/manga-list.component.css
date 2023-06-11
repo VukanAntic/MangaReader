@@ -1,0 +1,23 @@
+.manga_image_wrapper {
+  margin-left: 1% !important;
+  margin-right: 1% !important;
+  margin-bottom: 1% !important;
+  border-radius: 10px !important;
+  height: 250px;
+  justify-content: center;
+}
+.arrow {
+  margin-top: 55px;
+  height: 120px;
+  background-color: unset;
+  width: 90px;
+}
+
+.left_arrow {
+  float: left;
+  margin-right: 5px;
+}
+.right_arrow {
+  float: right;
+  margin-left: 5px;
+}

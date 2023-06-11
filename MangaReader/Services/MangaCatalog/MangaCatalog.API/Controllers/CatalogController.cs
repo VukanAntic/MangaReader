@@ -38,7 +38,16 @@ namespace MangaCatalog.API.Controllers
             return Ok(allMangas);
         }
 
-        
+        [Route("[action]")]
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<MangaDTO>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<MangaDTO>>> GetMangasByIds([FromQuery(Name = "ids")] string idsString)
+        {
+            var ids = idsString.Split(',');
+            var mangas = await _repository.GetMangasByIds(ids);
+            return Ok(mangas);
+        }
+
         [HttpGet("{id}", Name = "GetManga")]
         [ProducesResponseType(typeof(MangaDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(MangaDTO), StatusCodes.Status404NotFound)]

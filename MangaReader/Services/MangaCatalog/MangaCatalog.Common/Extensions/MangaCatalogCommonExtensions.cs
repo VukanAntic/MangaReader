@@ -18,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using MassTransit;
+using MangaCatalog.Common.DTOs.Page;
 
 namespace MangaCatalog.Common.Extensions
 {
@@ -52,6 +53,11 @@ namespace MangaCatalog.Common.Extensions
             services.AddAutoMapper(configuration =>
             {
                 configuration.CreateMap<GenreDTO, Genre>().ReverseMap();
+            });
+
+            services.AddAutoMapper(configuration =>
+            {
+                configuration.CreateMap<PageDTO, Page>().ReverseMap();
             });
 
             services.AddMassTransit(config =>
