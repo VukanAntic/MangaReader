@@ -52,7 +52,7 @@ namespace MangaCatalog.Common.Repositories
         {
             using var connection = _context.GetConnection();
 
-            var chapter = await connection.QueryAsync<Chapter>(
+            var chapter = await connection.QueryFirstOrDefaultAsync<Chapter>(
                 "SELECT id, id_manga as idManga, chapter_number as chapterNumber, title " +
                 "FROM chapter " +
                 "WHERE chapter.id = @ChapterId;",

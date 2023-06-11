@@ -43,8 +43,8 @@ namespace MangaCatalog.API.Controllers
 
         [Route("[action]/{chapterId}")]
         [HttpGet]
-        [ProducesResponseType(typeof(PageDTO), StatusCodes.Status200OK)]
-        public async Task<ActionResult<PageDTO>> GetChapterById(string chapterId)
+        [ProducesResponseType(typeof(ChapterDTO), StatusCodes.Status200OK)]
+        public async Task<ActionResult<ChapterDTO>> GetChapterById(string chapterId)
         {
             var chapter = await _repository.GetChapterById(chapterId);
             return Ok(chapter);
