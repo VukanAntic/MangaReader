@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginFormComponent } from './feature-authentication/login-form/login-form.component';
+import { LogoutComponent } from './feature-authentication/logout/logout.component';
 import { UserProfileComponent } from './feature-user-info/user-profile/user-profile.component';
 import { IdentityComponent } from './identity.component';
 
@@ -15,6 +16,7 @@ const routes: Routes = [
     path: 'profile',
     component: UserProfileComponent,
   },
+  { path: 'logout', component: LogoutComponent },
 ];
 
 @NgModule({
