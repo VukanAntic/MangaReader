@@ -47,5 +47,18 @@ namespace MangaCatalog.Common.Repositories
 
             return chapters;
         }
+
+        public async Task<ChapterDTO> GetChapterById(string chapterId)
+        {
+            using var connection = _context.GetConnection();
+
+            var chapter = await connection.QueryAsync<Chapter>(
+                "SELECT id, id_manga as idManga, chapter_number as chapterNumber, title " +
+                "FROM chapter " +
+                "WHERE chapter.id = @ChapterId;",
+                new { ChapterId = chapterId });
+
+            return _mapper.Map<ChapterDTO>(chapter);
+        }
     }
 }
