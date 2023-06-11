@@ -1,14 +1,19 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { LoginFormComponent } from "./feature-authentication/login-form/login-form.component";
-import { IdentityComponent } from "./identity.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginFormComponent } from './feature-authentication/login-form/login-form.component';
+import { UserProfileComponent } from './feature-user-info/user-profile/user-profile.component';
+import { IdentityComponent } from './identity.component';
 
 // podrazumeva se prefiks /identity
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: IdentityComponent,
-    children: [{ path: "login", component: LoginFormComponent }],
+    children: [{ path: 'login', component: LoginFormComponent }],
+  },
+  {
+    path: 'profile',
+    component: UserProfileComponent,
   },
 ];
 
