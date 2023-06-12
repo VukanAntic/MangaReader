@@ -7,9 +7,10 @@ import { LoginFormComponent } from "./feature-authentication/login-form/login-fo
 import { ReactiveFormsModule } from "@angular/forms";
 import { UserProfileComponent } from './feature-user-info/user-profile/user-profile.component';
 import { LogoutComponent } from './feature-authentication/logout/logout.component';
+import { RegisterFormComponent } from './feature-authentication/register-form/register-form.component';
 
 @NgModule({
-  declarations: [IdentityComponent, LoginFormComponent, UserProfileComponent, LogoutComponent],
+  declarations: [IdentityComponent, LoginFormComponent, UserProfileComponent, LogoutComponent, RegisterFormComponent],
   imports: [CommonModule, IdentityRoutingModule, ReactiveFormsModule],
 })
 export class IdentityModule {}
