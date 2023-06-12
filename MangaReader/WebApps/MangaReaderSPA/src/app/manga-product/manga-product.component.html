@@ -2,6 +2,7 @@
     {{mangaData.title}}
     {{mangaData.description}}
     <img [src]="mangaData.coverArt" alt="Cover" width="500" height="600">
+    <button (click)="addToWishlist()">Add to wishlist</button>
     <h3>Chapters:</h3>
     <ul>    
         <li *ngFor='let mangaChapter of mangaChapters; let i=index;'>    

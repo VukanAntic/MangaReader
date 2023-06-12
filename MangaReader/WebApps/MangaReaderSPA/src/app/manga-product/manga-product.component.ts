@@ -1,3 +1,4 @@
+import { addToWishlistItem } from './domain/models/addToWishlistItem.model';
 import { ActivatedRoute, Route } from '@angular/router';
 import { MangaProductService } from './domain/infrastructure/manga-product.service';
 import { Component, OnInit } from '@angular/core';
@@ -32,8 +33,18 @@ export class MangaProductComponent implements OnInit {
         console.log(this.mangaChapters);
       });  
     });
-    
-   
+  }
+
+  addToWishlist() : void {
+    var item = new addToWishlistItem();
+    item.mangaId = this.mangaId;
+    console.log(item);
+    this.mangaProductService.getWishlistItem().subscribe((res) => {
+      console.log(res);
+    });
+    this.mangaProductService.addToWishlist(item).subscribe((res) => {
+      console.log(res);
+    });
   }
 
 }
