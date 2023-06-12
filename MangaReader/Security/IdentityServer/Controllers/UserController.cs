@@ -56,5 +56,32 @@ namespace IdentityServer.Controllers
            
             return Ok(await _userManager.ChangePasswordAsync(user, changepassword.OldPassword, changepassword.NewPassword));
         }
+
+
+        [HttpPut("[action]")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        public async Task<ActionResult> ChangeEmail([FromBody] UserChangeEmailDTO changeEmail)
+        {
+            var email = User.FindFirst(ClaimTypes.Email).Value;
+            var user = await _userManager.FindByEmailAsync(email);
+
+            await _userManager.SetEmailAsync(user, changeEmail.NewEmail);
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+            return Ok(await _userManager.ConfirmEmailAsync(user, token));
+
+        }
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
