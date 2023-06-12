@@ -7,7 +7,7 @@ import { AuthenticationFacadeService } from 'src/app/identity/domain/application
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
-  private readonly whitelistUrls: string[] = ['api/v1/Login/Login', '/api/v1/Login/Refresh'];
+  private readonly whitelistUrls: string[] = ['api/v1/Login/Login'];
 
   private isRefreshing: boolean = false;
   private refreshedAccessTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);

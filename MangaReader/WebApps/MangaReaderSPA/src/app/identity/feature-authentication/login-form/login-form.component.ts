@@ -38,7 +38,7 @@ export class LoginFormComponent implements OnInit {
       }
       this.loginForm.reset();
       if (success) {
-        this.routerService.navigate(['/identity', 'profile']);
+        this.routerService.navigate(['recommended']);
       }
     });
   }
