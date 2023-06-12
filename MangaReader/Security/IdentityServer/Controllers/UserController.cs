@@ -62,8 +62,8 @@ namespace IdentityServer.Controllers
         [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
         public async Task<ActionResult> ChangeEmail([FromBody] UserChangeEmailDTO changeEmail)
         {
-            var email = User.FindFirst(ClaimTypes.Email).Value;
-            var user = await _userManager.FindByEmailAsync(email);
+            var name = User.FindFirst(ClaimTypes.Name).Value;
+            var user = await _userManager.FindByNameAsync(name);
 
             await _userManager.SetEmailAsync(user, changeEmail.NewEmail);
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
