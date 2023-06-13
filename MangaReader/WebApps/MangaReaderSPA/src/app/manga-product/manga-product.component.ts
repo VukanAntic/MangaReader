@@ -1,5 +1,5 @@
 import { addToWishlistItem } from './domain/models/addToWishlistItem.model';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { MangaProductService } from './domain/infrastructure/manga-product.service';
 import { Component, OnInit } from '@angular/core';
 import { Manga } from './domain/models/manga.model';
@@ -14,24 +14,23 @@ export class MangaProductComponent implements OnInit {
 
   public mangaId! : string;
   public mangaData! : Manga;
-  public mangaChapters! : [Chapter];
+  public mangaChapters! : Chapter[];
 
-  constructor(private mangaProductService : MangaProductService, private route : ActivatedRoute) {
+  constructor(private mangaProductService : MangaProductService, private route : ActivatedRoute, private router: Router) {
    }
 
   ngOnInit(): void {
     // TODO: better way of showing a 404
     this.route.paramMap.subscribe((params) => {
       this.mangaId = String(params.get("mangaId"));
-      this.mangaProductService.getMangaData(this.mangaId).subscribe(
-        (res) => {
-          this.mangaData = res;
-        }, 
-      );
-      this.mangaProductService.getMangaChapters(this.mangaId).subscribe((res) => {
-        this.mangaChapters = res;
-        console.log(this.mangaChapters);
-      });  
+      this.mangaProductService.getMangaData(this.mangaId).subscribe( {
+        next: (res) => this.mangaData = res,
+        error: (e) => this.router.navigate(['404']),
+      });
+      this.mangaProductService.getMangaChapters(this.mangaId).subscribe( {
+        next: (res) => this.mangaChapters = res,
+        error: (e) => this.router.navigate(['404']),
+    });   
     });
   }
 
@@ -43,6 +42,7 @@ export class MangaProductComponent implements OnInit {
       console.log(res);
     });
     this.mangaProductService.addToWishlist(item).subscribe((res) => {
+      window.alert("Item added to wishlist!");
       console.log(res);
     });
   }
