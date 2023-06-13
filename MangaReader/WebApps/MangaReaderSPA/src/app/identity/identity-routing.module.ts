@@ -6,16 +6,17 @@ import { LogoutComponent } from "./feature-authentication/logout/logout.componen
 import { UserProfileComponent } from "./feature-user-info/user-profile/user-profile.component";
 import { IdentityComponent } from "./identity.component";
 import { ChangePasswordComponent } from "./feature-user-info/change-password/change-password.component";
+import { RegisterFormComponent } from './feature-authentication/register-form/register-form.component';
 
 // podrazumeva se prefiks /identity
 const routes: Routes = [
   {
     path: "",
     component: IdentityComponent,
-    children: [{ path: "login", component: LoginFormComponent }],
+    children: [{ path: "login", component: LoginFormComponent }, { path: 'register', component: RegisterFormComponent }],
   },
   {
-    path: "profile",
+    path: 'profile',
     component: UserProfileComponent,
     canActivate: [NotAuthenticatedGuard],
   },
