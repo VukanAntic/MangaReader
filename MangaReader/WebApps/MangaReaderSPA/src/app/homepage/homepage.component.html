@@ -1,0 +1,9 @@
+<body>
+  <div id="background">
+    <div class="ui segments">
+      <div *ngFor="let oneGenre of genreMangasList | async; let i = index">
+        <app-manga-list [genreName]="genreNames[i]" [mangaList]="oneGenre"></app-manga-list>
+      </div>
+    </div>
+  </div>
+</body>

@@ -9,7 +9,7 @@ import { RecommendationPage } from "../models/recommendation-page.model";
 export class RecommendationService {
   constructor(private httpClient: HttpClient) {}
 
-  public getRecommenationPage(accessToken?: string): Observable<RecommendationPage> {
+  public getRecommenationPage(): Observable<RecommendationPage> {
     return this.httpClient.get<RecommendationPage>("http://localhost:8004/api/Recommendation/GetRecommendationPage");
   }
 }

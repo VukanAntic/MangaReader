@@ -11,6 +11,7 @@ const routes: Routes = [
     path: 'recommended',
     loadChildren: () => import('./recommended/recommended.module').then((m) => m.RecommendedModule),
   },
+  { path: 'homepage', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
 ];
 
 @NgModule({
