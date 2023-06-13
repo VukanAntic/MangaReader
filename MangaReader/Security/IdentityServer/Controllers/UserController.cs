@@ -72,6 +72,21 @@ namespace IdentityServer.Controllers
 
         }
 
+
+        [HttpPut("[action]")]
+        [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+        public async Task<ActionResult> ChangeLastAndFirstName([FromBody] UserChangeLastAndFirstNameDTO changeDTO)
+        {
+            var name = User.FindFirst(ClaimTypes.Name).Value;
+            var user = await _userManager.FindByNameAsync(name);
+
+            user.LastName = changeDTO.LastName;
+            user.FirstName = changeDTO.FirstName;
+
+            return Ok(await _userManager.UpdateAsync(user));
+
+        }
+
     }
 }
 
