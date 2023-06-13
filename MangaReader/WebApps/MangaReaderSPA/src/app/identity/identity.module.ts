@@ -5,11 +5,12 @@ import { IdentityRoutingModule } from "./identity-routing.module";
 import { IdentityComponent } from "./identity.component";
 import { LoginFormComponent } from "./feature-authentication/login-form/login-form.component";
 import { ReactiveFormsModule } from "@angular/forms";
-import { UserProfileComponent } from './feature-user-info/user-profile/user-profile.component';
-import { LogoutComponent } from './feature-authentication/logout/logout.component';
+import { UserProfileComponent } from "./feature-user-info/user-profile/user-profile.component";
+import { LogoutComponent } from "./feature-authentication/logout/logout.component";
+import { ChangePasswordComponent } from "./feature-user-info/change-password/change-password.component";
 
 @NgModule({
-  declarations: [IdentityComponent, LoginFormComponent, UserProfileComponent, LogoutComponent],
+  declarations: [IdentityComponent, LoginFormComponent, UserProfileComponent, LogoutComponent, ChangePasswordComponent],
   imports: [CommonModule, IdentityRoutingModule, ReactiveFormsModule],
 })
 export class IdentityModule {}
