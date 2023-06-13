@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthenticationFacadeService } from '../../domain/application-services/authentication-facade.service';
+import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { AuthenticationFacadeService } from "../../domain/application-services/authentication-facade.service";
 
 interface IRegisterFormData {
   firstname: string;
@@ -13,21 +13,21 @@ interface IRegisterFormData {
 }
 
 @Component({
-  selector: 'app-register-form',
-  templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.css'],
+  selector: "app-register-form",
+  templateUrl: "./register-form.component.html",
+  styleUrls: ["./register-form.component.css"],
 })
 export class RegisterFormComponent implements OnInit {
   public registerForm: FormGroup;
 
   constructor(private authenticationService: AuthenticationFacadeService, private routerService: Router) {
     this.registerForm = new FormGroup({
-      firstname: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      lastname: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      username: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      email: new FormControl('', [Validators.required, Validators.minLength(3), Validators.email]),
-      phoneNumber: new FormControl('', [Validators.minLength(3)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      firstname: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      lastname: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      username: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      email: new FormControl("", [Validators.required, Validators.minLength(3), Validators.email]),
+      phoneNumber: new FormControl("", [Validators.minLength(3)]),
+      password: new FormControl("", [Validators.required, Validators.minLength(3)]),
     });
   }
 
@@ -35,7 +35,7 @@ export class RegisterFormComponent implements OnInit {
 
   public onRegisterFormSubmit(): void {
     if (this.registerForm.invalid) {
-      window.alert('Form has errors!');
+      window.alert("Form has errors!");
       return;
     }
 
@@ -48,7 +48,7 @@ export class RegisterFormComponent implements OnInit {
         }
         this.registerForm.reset();
         if (success) {
-          this.routerService.navigate(['recommended']);
+          this.routerService.navigate(["homepage"]);
         }
       });
   }
