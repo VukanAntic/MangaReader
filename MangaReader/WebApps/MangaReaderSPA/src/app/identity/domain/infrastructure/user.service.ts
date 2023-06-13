@@ -3,9 +3,9 @@ import { Injectable } from "@angular/core";
 import { IUserDetails } from "../models/user-details";
 import { Observable, switchMap, take } from "rxjs";
 import { AppStateService } from "src/app/shared/app-state/app-state.service";
-import { IUpdateLastAndFirstName } from "../models/updateLastAndFirstName-request";
 import { IUpdateEmail } from "../models/updateEmail-request";
 import { IChangePassword } from "../models/changePassword-request";
+import { IUpdateLastAndFirstName } from "../models/updateLastAndFirstName-request";
 
 @Injectable({
   providedIn: "root",
