@@ -7,6 +7,8 @@ namespace MangaCatalog.Common.Repositories.Interfaces
     public interface IChapterRepository
     {
         Task<IEnumerable<ChapterDTO>> GetChaptersByMangaId(string mangaId);
+        Task<ChapterDTO> GetChapterById(string chapterId);
+        Task<AdjacentChapterDTO> GetAdjacentChapters(string chapterId);
         Task<IEnumerable<PageDTO>> GetPagesForChapterId(string chapterId);
 
     }

@@ -1,0 +1,13 @@
+<div class="image" >
+    <img [src]="manga.coverArt" /> 
+</div>
+<div class="content">
+   <a class="header" [routerLink]="['/manga', manga.id]" >{{ manga.title }} </a>
+   <div class="description">
+       <p>{{ manga.description }}</p>
+   </div>
+   <div class="meta">
+   </div>
+</div>
+
+

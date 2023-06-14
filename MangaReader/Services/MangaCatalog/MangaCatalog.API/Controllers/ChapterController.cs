@@ -41,6 +41,27 @@ namespace MangaCatalog.API.Controllers
 
         }
 
+        [Route("[action]/{chapterId}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(ChapterDTO), StatusCodes.Status200OK)]
+        public async Task<ActionResult<ChapterDTO>> GetChapterById(string chapterId)
+        {
+            var chapter = await _repository.GetChapterById(chapterId);
+            return Ok(chapter);
+
+        }
+
+        [Route("[action]/{chapterId}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(AdjacentChapterDTO), StatusCodes.Status200OK)]
+        public async Task<ActionResult<AdjacentChapterDTO>> GetAdjacentChapters(string chapterId)
+        {
+            var chapter = await _repository.GetAdjacentChapters(chapterId);
+            return Ok(chapter);
+
+        }
+
+
 
     }
 }

@@ -1,14 +1,39 @@
-<div class="ui divided items" *ngIf="(mangaData) != undefined && (mangaChapters) != undefined">
-    {{mangaData.title}}
-    {{mangaData.description}}
-    <img [src]="mangaData.coverArt" alt="Cover" width="500" height="600">
+<h3 class="title">{{mangaData.title}}</h3>
+<div class="container" *ngIf="(mangaData) != null && (mangaChapters) != null">
+    <img class="image" [src]="mangaData.coverArt" alt="Cover">
+    <div class="text_container">
+        {{mangaData.description}}
+        <hr />
+        Status: {{mangaData.status}}
+        <hr />
+
+        Genres: {{this.allGenreString}}
+
+        <hr />
+
+        Overall rating: {{this.rating}} (out of 5)
+        <hr />
+        Add your rating:
+        <br>
+        <app-rating [mangaId]="mangaId"></app-rating>
+        
+        <br>
+        <br>
+        <br>
+        <button class="ui button" (click)="addToWishlist()">Add to wishlist</button>
+    </div>
+</div>
+<div class="chapters">
     <h3>Chapters:</h3>
-    <ul>    
-        <li *ngFor='let mangaChapter of mangaChapters; let i=index;'>    
-          <a routerLink="/chapter/{{mangaChapter.id}}"  routerLinkActive="active">{{mangaChapter.chapterNumber}} : {{mangaChapter.title}}</a>
-                
+    <ul>
+        <li *ngFor='let mangaChapter of mangaChapters; let i=index;'>
+            <a routerLink="/chapter/{{mangaChapter.id}}" routerLinkActive="active">{{mangaChapter.chapterNumber}} :
+                {{mangaChapter.title}}</a>
+
     </ul>
 </div>
-<div class="ui divided items" *ngIf="(mangaData) == undefined">
-    404
+
+
+<div class="ui divided items" *ngIf="(mangaData) == null && (mangaChapters) == null">
+    Loading...
 </div>
