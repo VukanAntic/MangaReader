@@ -12,6 +12,7 @@ import { IAppState } from 'src/app/shared/app-state/app-state';
 import { ILogoutRequest } from '../models/logout-request';
 import { IRefreshTokenRequest } from '../models/refresh-token-request';
 import { IRefreshTokenResponse } from '../models/refresh-token-response';
+import { IRegisterRequest } from '../models/register-request';
 
 @Injectable({
   providedIn: 'root',
@@ -91,6 +92,18 @@ export class AuthenticationFacadeService {
         console.log(err);
         this.appStateService.clearAppState();
         return of(null);
+      })
+    );
+  }
+
+  public register(firstname: string, lastname: string, username: string, password: string, email: string, phoneNumber: string): Observable<boolean> {
+    const request: IRegisterRequest = { firstname, lastname, username, password, email, phoneNumber };
+
+    return this.authenticationService.register(request).pipe(
+      switchMap((registerResponse: any) => {
+        console.log(registerResponse);
+
+        return this.login(username, password);
       })
     );
   }

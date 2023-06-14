@@ -9,16 +9,32 @@
       </tr>
       <tr>
         <td class="table-active">Email</td>
-        <td>{{ appState.email }}</td>
+        <td>
+          <span *ngIf="!editableEmail">{{ appState.email }}</span>
+          <input type="text" #box class="form-control" (keyup.enter)="updateEmail(box.value)" *ngIf="editableEmail" placeholder="{{ appState.email }}" />
+        </td>
+        <td><button class="btn btn-primary" (click)="editEmail()">Edit</button></td>
       </tr>
       <tr>
         <td class="table-active">Name</td>
-        <td>{{ appState.firstName }} {{ appState.lastName }}</td>
+        <td>
+          <span *ngIf="!editableName">{{ appState.firstName }} {{ appState.lastName }}</span>
+          <input
+            type="text"
+            #box
+            class="form-control"
+            (keyup.enter)="updateName(box.value)"
+            *ngIf="editableName"
+            placeholder="{{ appState.firstName }} {{ appState.lastName }}" />
+        </td>
+        <td><button class="btn btn-primary" (click)="editName()">Edit</button></td>
       </tr>
     </tbody>
   </table>
-
-  <ng-template #notLoggedIn>
-    <p>Please <a [routerLink]="['/identity', 'login']">login</a> to see ypur information</p>
-  </ng-template>
+</div>
+<ng-template #notLoggedIn>
+  <p>Please <a [routerLink]="['/identity', 'login']">login</a> to see ypur information</p>
+</ng-template>
+<div>
+  <button class="btn btn-primary" (click)="openChangePasswordForm()">Change password</button>
 </div>

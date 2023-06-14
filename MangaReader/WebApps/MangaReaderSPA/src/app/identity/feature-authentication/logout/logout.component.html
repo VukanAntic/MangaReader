@@ -1,1 +1,9 @@
-<h4 *ngIf="logoutSuccess$ | async as logoutSuccess">Logout {{ logoutSuccess ? "" : "un" }} successful.</h4>
+<div class="container" *ngIf="logoutSuccess$ | async as logoutSuccess">
+  <div class="center">
+    <h2>You have successfully logged out!</h2>
+    <h2 style="margin-top: 20px">
+      Click here to
+      <button class="btn btn-info" style="width: fit-content" onclick="window.location='http://localhost:4200/identity';">LOGIN</button> !
+    </h2>
+  </div>
+</div>

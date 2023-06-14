@@ -20,12 +20,8 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public getNavbarTitle(appState: IAppState): string {
-    if (appState.firstName !== undefined && appState.lastName !== undefined) {
-      return `Welcome to MangaReader, ${appState.firstName} ${appState.lastName}`;
-    }
-
-    return `MangaReader`;
+  public getUserName(appState: IAppState): string {
+    return `${appState.firstName} ${appState.lastName}`;
   }
 
   public userLoggedIn(appState: IAppState): boolean {

@@ -15,11 +15,11 @@ import { RatingComponent } from './rating/rating.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
+
 @NgModule({
   declarations: [AppComponent, NavbarComponent, MangaProductComponent, ChapterComponent, SearchComponent, SearchMangaComponent, ErrorComponent, RatingComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }],
   bootstrap: [AppComponent],
-  })
-
+})
 export class AppModule {}
