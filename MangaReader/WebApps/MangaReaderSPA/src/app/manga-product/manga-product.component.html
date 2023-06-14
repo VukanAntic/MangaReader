@@ -3,21 +3,34 @@
     <img class="image" [src]="mangaData.coverArt" alt="Cover">
     <div class="text_container">
         {{mangaData.description}}
-        <br>
+        <hr />
         Status: {{mangaData.status}}
-        <br>
-        Rating: {{mangaData.sumOfRatings / mangaData.numberOfRatings}} (out of 5)
+        <hr />
 
+        Genres: {{this.allGenreString}}
+
+        <hr />
+
+        Overall rating: {{this.rating}} (out of 5)
+        <hr />
+        Add your rating:
+        <br>
+        <app-rating [mangaId]="mangaId"></app-rating>
+        
+        <br>
+        <br>
+        <br>
         <button class="ui button" (click)="addToWishlist()">Add to wishlist</button>
     </div>
 </div>
 <div class="chapters">
     <h3>Chapters:</h3>
-        <ul>    
-            <li *ngFor='let mangaChapter of mangaChapters; let i=index;'>    
-            <a routerLink="/chapter/{{mangaChapter.id}}"  routerLinkActive="active">{{mangaChapter.chapterNumber}} : {{mangaChapter.title}}</a>
-                
-        </ul>
+    <ul>
+        <li *ngFor='let mangaChapter of mangaChapters; let i=index;'>
+            <a routerLink="/chapter/{{mangaChapter.id}}" routerLinkActive="active">{{mangaChapter.chapterNumber}} :
+                {{mangaChapter.title}}</a>
+
+    </ul>
 </div>
 
 
