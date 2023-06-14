@@ -1,9 +1,24 @@
-.links {
+.footer {
     width: 800px;
-    margin: 0 auto;
+    margin: 0  auto;
+}
+
+.links {
+    text-align: center; 
 }
 
 .content {
     width: 800px;
     margin: 0 auto;
+}
+
+.title{
+    font-size: 32px;
+    font-style: bold;
+    text-shadow: 1px 1px rgba(0,0,0,0.8);
+    text-align: center;
+}
+
+.container {
+    padding-bottom: 50px;
 }
