@@ -51,4 +51,8 @@ export class ChangePasswordComponent implements OnInit {
       }
     });
   }
+
+  public onCancel(): void {
+    this.routerService.navigate(["/identity", "profile"]);
+  }
 }

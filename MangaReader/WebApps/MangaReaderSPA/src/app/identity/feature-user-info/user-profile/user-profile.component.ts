@@ -15,12 +15,14 @@ export class UserProfileComponent implements OnInit {
 
   public editableEmail?: boolean;
   public editableName?: boolean;
+  public changingPassword?: boolean;
 
-  constructor(private AppStateService: AppStateService, private userService: UserFasadeService, private routerService: Router) {
+  constructor(private AppStateService: AppStateService, private userService: UserFasadeService) {
     this.appState$ = this.AppStateService.getAppState();
 
     this.editableEmail = false;
     this.editableName = false;
+    this.changingPassword = false;
   }
 
   ngOnInit(): void {}
@@ -51,6 +53,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   openChangePasswordForm(): void {
-    this.routerService.navigate(["/identity", "profile", "changePassword"]);
+    this.changingPassword = true;
   }
 }

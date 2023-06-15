@@ -36,5 +36,7 @@
   <p>Please <a [routerLink]="['/identity', 'login']">login</a> to see ypur information</p>
 </ng-template>
 <div>
-  <button class="btn btn-primary" (click)="openChangePasswordForm()">Change password</button>
+  <button class="btn btn-primary" [routerLink]="['changePassword']" (click)="openChangePasswordForm()">Change password</button>
 </div>
+
+<router-outlet></router-outlet>
