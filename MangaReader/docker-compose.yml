@@ -6,6 +6,8 @@ services:
 
   userInfodb:
     image: redis:alpine
+    volumes:
+      - ./data:/data
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
