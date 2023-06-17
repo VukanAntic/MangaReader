@@ -11,9 +11,6 @@ services:
 
   userInfodb:
     container_name: userInfodb
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
     restart: always
     ports:
       - "6379:6379"
