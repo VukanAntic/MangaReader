@@ -11,7 +11,6 @@ services:
 
   userInfodb:
     container_name: userInfodb
-    command: redis-server --appendonly yes
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
       - DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
