@@ -18,7 +18,7 @@ Manga reader aplikacija napralvjena je u okviru kursa Razvoj softvera 2. Ova apl
    - Redis
 
 3. **Front-End Okvir:**
-   - React
+   - Angular
 
 4. **Protokoli za Komunikaciju:**
    - gRPC
