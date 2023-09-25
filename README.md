@@ -12,25 +12,26 @@ Manga reader aplikacija napralvjena je u okviru kursa Razvoj softvera 2. Ova apl
    - C#
 
 2. **Baze Podataka:**
+   - NeonTech DB
    - PostgreSQL (sa SUBP)
    - SQL Server (sa SUBP)
    - MongoDB (sa SUBP)
    - Redis
 
-3. **Front-End Okvir:**
+4. **Front-End Okvir:**
    - Angular
 
-4. **Protokoli za Komunikaciju:**
+5. **Protokoli za Komunikaciju:**
    - gRPC
 
-5. **Red za Poruke:**
+6. **Red za Poruke:**
    - RabbitMQ
 
-6. **Autentifikacija i Autorizacija:**
+7. **Autentifikacija i Autorizacija:**
    - Microsoft ASP.NET Identity
    - JSON Web Tokens (JWT)
 
-7. **Kontejnerizacija:**
+8. **Kontejnerizacija:**
    - Docker Compose
   
 # 🛠️ Instalacije i pokretanje
